@@ -174,7 +174,7 @@
             // chkDesconto
             // 
             this.chkDesconto.AutoSize = true;
-            this.chkDesconto.Location = new System.Drawing.Point(23, 11);
+            this.chkDesconto.Location = new System.Drawing.Point(9, 13);
             this.chkDesconto.Name = "chkDesconto";
             this.chkDesconto.Size = new System.Drawing.Size(72, 17);
             this.chkDesconto.TabIndex = 12;
@@ -186,9 +186,9 @@
             // 
             this.txtDesconto.Enabled = false;
             this.txtDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDesconto.Location = new System.Drawing.Point(22, 42);
+            this.txtDesconto.Location = new System.Drawing.Point(32, 41);
             this.txtDesconto.Name = "txtDesconto";
-            this.txtDesconto.Size = new System.Drawing.Size(44, 24);
+            this.txtDesconto.Size = new System.Drawing.Size(55, 24);
             this.txtDesconto.TabIndex = 13;
             this.txtDesconto.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -196,11 +196,11 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(69, 47);
+            this.label6.Location = new System.Drawing.Point(7, 46);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(21, 16);
+            this.label6.Size = new System.Drawing.Size(24, 16);
             this.label6.TabIndex = 14;
-            this.label6.Text = "%";
+            this.label6.Text = "R$";
             // 
             // panel1
             // 

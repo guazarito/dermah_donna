@@ -52,7 +52,7 @@ namespace Dermahdonna
             {
                 //grdResumoPgtos
                 String sResumoPgtos;
-                sResumoPgtos = "select fp.descricao as 'Forma Pagamento', count(id_forma_pgto) as 'Qtde. Vendas', cast(sum(valor_total - (valor_total * desconto)) as varchar) as 'Valor Total Vendido' from vendas left join forma_pgto fp on fp.id = vendas.id_forma_pgto";
+                sResumoPgtos = "select fp.descricao as 'Forma Pagamento', count(id_forma_pgto) as 'Qtde. Vendas', cast(sum(valor_total - desconto) as varchar) as 'Valor Total Vendido' from vendas left join forma_pgto fp on fp.id = vendas.id_forma_pgto";
                 sResumoPgtos += " where isnull(cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 sResumoPgtos += " group by id_forma_pgto, fp.descricao ";
 
@@ -85,8 +85,8 @@ namespace Dermahdonna
                 //grdRel
                 String sRel;
                 sRel = "select ROW_NUMBER() over(order by vi.id_venda) as ' Item', right('00000' + cast(vi.id_venda as nvarchar),6) as 'Núm. da Venda', v.nome_cliente as '   Cliente', convert(varchar(11), v.data,103) as '    Data',";
-                sRel += " (select case when vi.id_adicional is null then p.descricao else 'adicional: ' + a.descricao end) as '    Descrição', (select case when v.desconto = 0 then ' - ' else cast(isnull(v.desconto,0)*100 as varchar) + '%' end) as '  Desconto', cast((vi.vl_total_item) as varchar) as 'Valor Ítem',";
-                sRel += " cast((vi.vl_total_item)-(vi.vl_total_item*v.desconto) as varchar) as 'Valor Total'";
+                sRel += " (select case when vi.id_adicional is null then p.descricao else 'adicional: ' + a.descricao end) as '    Descrição', (select case when v.desconto = 0 then ' - ' else cast(isnull(v.desconto,0) as varchar) end) as '  Desconto', cast((vi.vl_total_item) as varchar) as 'Valor Ítem',";
+                sRel += " cast((vi.vl_total_item)-(v.desconto) as varchar) as 'Valor Total'";
                 sRel += " from vendas_itens vi left outer join vendas v on vi.id_venda=v.id left outer join procedimento p on p.id=vi.id_procedimento left outer join adicional a on a.id=vi.id_adicional";
                 sRel += " where isnull(v.cancelado,0)<>1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 sRel += " order by v.id";
@@ -139,7 +139,7 @@ namespace Dermahdonna
                 
                 //grdResumoItens
                 String sResumoItens;
-                sResumoItens = "select p.descricao as 'Descrição', count(id_procedimento) as Quantidade, cast(sum(vl_total_item - (vl_total_item*desconto)) as varchar) as 'Valor total'";
+                sResumoItens = "select p.descricao as 'Descrição', count(id_procedimento) as Quantidade, cast(sum(vl_total_item - (desconto)) as varchar) as 'Valor total'";
                 sResumoItens += " from vendas_itens left join vendas v on v.id = vendas_itens.id_venda left join procedimento p on p.id = vendas_itens.id_procedimento";
                 sResumoItens += " where id_adicional is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 sResumoItens += " group by id_procedimento,  p.descricao";
@@ -153,7 +153,7 @@ namespace Dermahdonna
                 grdResumoItens.ReadOnly = true;
 
                 String sResumoItens2;
-                sResumoItens2 = "select 'adicional: ' + a.descricao as 'Descrição', count(id_adicional) as Quantidade, cast(sum(vl_total_item - (vl_total_item*desconto)) as varchar) as 'Valor total' from vendas_itens ";
+                sResumoItens2 = "select 'adicional: ' + a.descricao as 'Descrição', count(id_adicional) as Quantidade, cast(sum(vl_total_item - (desconto)) as varchar) as 'Valor total' from vendas_itens ";
                 sResumoItens2 += " left join vendas v on v.id = vendas_itens.id_venda left join adicional a on a.id = vendas_itens.id_adicional";
                 sResumoItens2 += " where id_procedimento is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 sResumoItens2 += " group by id_adicional,  a.descricao";
@@ -222,7 +222,7 @@ namespace Dermahdonna
 
                 toolStripStatusLabel1.Text = "Número de vendas no período: " + numero_de_pedidos.ToString();
 
-                String sQueryTotal = "select cast(sum(valor_total) as varchar) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+                String sQueryTotal = "select isnull(cast(sum(valor_total) as varchar),0) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 txtPrecoTotal.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotal, "total").Replace(",", "").Replace(".", ",").Replace("R$ ", "")));
                 txtPrecoTotal.Text = txtPrecoTotal.Text.Replace("R$ ", "");
 
@@ -232,7 +232,7 @@ namespace Dermahdonna
                     lblPrecoDesc2.Visible = true;
                     txtPrecoTotalDEsc.Visible = true;
 
-                    String sQueryTotalDesconto = "select cast(sum(valor_total - (desconto*valor_total)) as varchar) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+                    String sQueryTotalDesconto = "select cast(sum(valor_total - (desconto)) as varchar) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                     txtPrecoTotalDEsc.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotalDesconto, "total").Replace(",","").Replace(".",",").Replace("R$ ","")));
                     txtPrecoTotalDEsc.Text = txtPrecoTotalDEsc.Text.Replace("R$ ","");
                 }
@@ -577,7 +577,7 @@ namespace Dermahdonna
             {
                 //grdRelFunc
                 String sRelFunc;
-                sRelFunc = "select f.nome as 'Nome',  count(id_func) 'Qtde. procedimentos',  cast(sum(vl_total_item - (vl_total_item*desconto)) as varchar) as 'Valor Total' from vendas_itens left join ";
+                sRelFunc = "select f.nome as 'Nome',  count(id_func) 'Qtde. procedimentos',  cast(sum(vl_total_item - (desconto)) as varchar) as 'Valor Total' from vendas_itens left join ";
                 sRelFunc += " funcionario f on f.id = vendas_itens.id_func left join vendas v on v.id = vendas_itens.id_venda";
                 sRelFunc += " where id_adicional is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
                 sRelFunc += " group by id_func,f.nome";
@@ -608,7 +608,7 @@ namespace Dermahdonna
                 grdRelFunc.ClearSelection();
                 //fim grdRelFunc
 
-                String sQueryTotal = "select cast(sum(vl_total_item - (desconto*vl_total_item)) as varchar) as 'valor total' from vendas_itens left join funcionario f on f.id = vendas_itens.id_func left join vendas v on v.id = vendas_itens.id_venda";
+                String sQueryTotal = "select isnull(cast(sum(vl_total_item - (desconto)) as varchar),0) as 'valor total' from vendas_itens left join funcionario f on f.id = vendas_itens.id_func left join vendas v on v.id = vendas_itens.id_venda";
                 sQueryTotal += " where id_adicional is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
 
                 txtTotFunc.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotal, "valor total").Replace(",", "").Replace(".", ",").Replace("R$ ", "")));
@@ -665,7 +665,7 @@ namespace Dermahdonna
                 String dtFinal = dtFimFuncDet.Value.ToString("yyyy-MM-dd");
 
                 String sQueryDetFunc = "select  ROW_NUMBER() over(order by vi.id_venda) as ' Item',  right('00000' + cast(vi.id_venda as nvarchar),6) as 'Núm. da Venda', convert(varchar(11), v.data,103) as 'Data',";
-                sQueryDetFunc += " p.descricao as 'Procedimento', c.nome as 'Cliente', fp.descricao as 'Forma Pagamento', cast(vi.vl_total_item - (desconto*vi.vl_total_item) as varchar) as 'Valor Total'";
+                sQueryDetFunc += " p.descricao as 'Procedimento', c.nome as 'Cliente', fp.descricao as 'Forma Pagamento', cast(vi.vl_total_item - (desconto) as varchar) as 'Valor Total'";
                 sQueryDetFunc += " from vendas_itens vi left join vendas v on v.id=vi.id_venda left join funcionario f on f.id= vi.id_func left join procedimento p on p.id = vi.id_procedimento";
                 sQueryDetFunc += " left join cliente c on c.id = v.id_cliente left join forma_pgto fp on fp.id = v.id_forma_pgto";
                 sQueryDetFunc += " where isnull(v.cancelado,0) <> 1 and id_func = " + cboFuncionarios.SelectedValue + " and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
@@ -708,7 +708,7 @@ namespace Dermahdonna
 
                 grdFuncDet.ClearSelection();
 
-                String sQueryTotalFuncDet = "select  cast(sum(vi.vl_total_item - (v.desconto*vi.vl_total_item)) as varchar) as 'valor total' from vendas_itens vi left join vendas v on v.id=vi.id_venda";
+                String sQueryTotalFuncDet = "select  isnull(cast(sum(vi.vl_total_item - (v.desconto)) as varchar),0) as 'valor total' from vendas_itens vi left join vendas v on v.id=vi.id_venda";
                 sQueryTotalFuncDet += " where isnull(v.cancelado,0) <> 1 and id_func = " + cboFuncionarios.SelectedValue + " and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
 
                 txtValorTotalFuncDet.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotalFuncDet, "valor total").Replace(",", "").Replace(".", ",").Replace("R$ ", "")));
