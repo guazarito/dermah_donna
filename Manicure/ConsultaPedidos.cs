@@ -31,11 +31,11 @@ namespace Dermahdonna
 
             if (!vercancelados)
             {
-                select = "select right('000000' + cast(id as nvarchar),6) as 'Núm. Venda', nome_cliente as 'Cliente', cast((valor_total - (valor_total*desconto)) as varchar) as 'Valor Total', convert(varchar(5),data, 114) as 'Hora do Pedido' from vendas where convert(varchar(11),data,103)=convert(varchar(11),'" + dtConsulta.Text.ToString() + "',103) and isnull(cancelado,0)<>1";
+                select = "select right('000000' + cast(id as nvarchar),6) as 'Núm. Venda', nome_cliente as 'Cliente', cast((valor_total - (desconto)) as varchar) as 'Valor Total', convert(varchar(5),data, 114) as 'Hora do Pedido' from vendas where convert(varchar(11),data,103)=convert(varchar(11),'" + dtConsulta.Text.ToString() + "',103) and isnull(cancelado,0)<>1";
             }
             else
             {
-                select = "select right('000000' + cast(id as nvarchar),6) as 'Núm. Venda', nome_cliente as 'Cliente', cast((valor_total - (valor_total*desconto)) as varchar) as 'Valor Total', convert(varchar(5),data, 114) as 'Hora do Pedido' from vendas where convert(varchar(11),data,103)=convert(varchar(11),'" + dtConsulta.Text.ToString() + "',103) and isnull(cancelado,0)=1";
+                select = "select right('000000' + cast(id as nvarchar),6) as 'Núm. Venda', nome_cliente as 'Cliente', cast((valor_total - (desconto)) as varchar) as 'Valor Total', convert(varchar(5),data, 114) as 'Hora do Pedido' from vendas where convert(varchar(11),data,103)=convert(varchar(11),'" + dtConsulta.Text.ToString() + "',103) and isnull(cancelado,0)=1";
             }
 
             var conn = new OdbcConnection();

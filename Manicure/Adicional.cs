@@ -39,14 +39,23 @@ namespace Dermahdonna
             }
             else
             {
+                txtValorAdicional.Text = txtValorAdicional.Text.Replace(".", ",");
+                txtValorAdicional.Text = string.Format("{0:C}", Convert.ToDecimal(txtValorAdicional.Text.ToString()));
+                txtValorAdicional.Text = txtValorAdicional.Text.Replace("R$ ", "");
                 String adicional = txtDescAdicional.Text.Replace("'", "''");
                 decimal Valor;
                 String sValorAdic;
 
                 try
                 {
-                    sValorAdic = txtValorAdicional.Text.Replace(".", ",");
-                    Valor = Convert.ToDecimal(sValorAdic, CultureInfo.CurrentCulture);
+                    if (Convert.ToDecimal(txtValorAdicional.Text, CultureInfo.CurrentCulture) >= 1000)
+                    {
+                        sValorAdic = txtValorAdicional.Text.Replace(".", "");
+                        sValorAdic = sValorAdic.Replace(",", "");
+                        sValorAdic = sValorAdic.Insert(sValorAdic.Length - 2, ".");
+                    }
+
+                    Valor = Convert.ToDecimal(txtValorAdicional.Text, CultureInfo.CurrentCulture);
                 }
                 catch (Exception)
                 {

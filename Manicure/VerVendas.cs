@@ -35,11 +35,11 @@ namespace Dermahdonna
             txtFpgto.Text = c.RetornaQuery("select fp.descricao from vendas left join forma_pgto fp on fp.id = vendas.id_forma_pgto where vendas.id=" + idvenda.ToString(), "descricao");
 
             decimal desconto = decimal.Parse(c.RetornaQuery("select desconto from vendas where id=" + idvenda.ToString(), "desconto"));
-            txtValorTotal.Text = c.RetornaQuery("select valor_total from vendas where id=" + idvenda.ToString(), "valor_total");
+            txtValorTotal.Text = string.Format("{0:C}", Convert.ToDecimal(c.RetornaQuery("select valor_total from vendas where id=" + idvenda.ToString(), "valor_total"))).Replace("R$ ", "");
 
             //preenche grid ... 
 
-            string select = "select ROW_NUMBER() over(order by vi.id_venda) as 'Item', p.descricao as 'Descrição',concat('R$ ', convert(varchar, vi.vl_total_item) as 'Valor Ítem', f.nome from vendas_itens vi left outer join procedimento p on p.id = vi.id_procedimento left outer join adicional a on a.id = vi.id_adicional left outer join vendas v on v.id = vi.id_venda left outer join funcionario f on f.id = vi.id_func where vi.id_venda = " + idvenda;
+            string select = "select ROW_NUMBER() over(order by vi.id_venda) as 'Item', (select case when p.descricao is not null then p.descricao else 'adicional: ' + a.descricao end) as 'Descrição', f.nome as 'Funcionário', format(vi.vl_total_item, 'c', 'pt-br') as 'Valor Ítem' from vendas_itens vi left outer join procedimento p on p.id = vi.id_procedimento left outer join adicional a on a.id = vi.id_adicional left outer join vendas v on v.id = vi.id_venda left outer join funcionario f on f.id = vi.id_func where vi.id_venda = " + idvenda;
 
             var conn = new OdbcConnection();
             conn.ConnectionString = c.getConexaoString();
@@ -64,14 +64,13 @@ namespace Dermahdonna
                 txtValorTotComDesconto.Visible = true;
                 lblRSDesconto.Visible = true;
                 lblTotDesconto.Visible = true;
-                decimal auxTotal = Math.Round(decimal.Parse(txtValorTotal.Text) - (decimal.Parse(txtValorTotal.Text) * desconto), 2);
-                txtValorTotComDesconto.Text = auxTotal.ToString().Replace(".", ",");
+                decimal auxTotal = decimal.Parse(txtValorTotal.Text) - desconto;
 
                 lblDesconto.Visible = true;
+                txtDesconto.Text = string.Format("{0:C}", Convert.ToDecimal(desconto.ToString()));
                 txtDesconto.Visible = true;
-
                 
-                txtDesconto.Text = Math.Round((desconto * 100),1).ToString() + "%" ;
+                txtValorTotComDesconto.Text = string.Format("{0:C}", Convert.ToDecimal(auxTotal.ToString())).Replace("R$ ","");
 
             }
 

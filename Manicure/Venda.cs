@@ -107,7 +107,7 @@ namespace Dermahdonna
             if (txtDesconto.Text != "" && float.Parse(txtDesconto.Text)> 0)
             {
                 txtDesconto.Text = txtDesconto.Text.Replace(".", ",");
-                string[] row1 = new string[] { (grdVenda.Rows.Count + 1).ToString(), "Desconto", "", "R$ " + txtDesconto.Text.ToString(), "", "desconto", "" };
+                string[] row1 = new string[] { (grdVenda.Rows.Count + 1).ToString(), "Desconto", "", string.Format("{0:C}", Convert.ToDecimal(txtDesconto.Text.ToString())), "", "desconto", "" };
                 grdVenda.Rows.Add(row1);
 
                 CalculaPrecoTotal();
@@ -126,6 +126,7 @@ namespace Dermahdonna
             bool bTemDesconto = false;
             
             preco_total = 0;
+            descontoAplicado = 0;
 
             for (int i = 0; i < rowscount; i++)
             {

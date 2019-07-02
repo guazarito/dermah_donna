@@ -61,6 +61,9 @@
             this.dtFim = new System.Windows.Forms.DateTimePicker();
             this.dtIni = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.lblDescFunc = new System.Windows.Forms.Label();
+            this.lblFuncDesc2 = new System.Windows.Forms.Label();
+            this.txtDescFunc = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.grdRelFunc = new System.Windows.Forms.DataGridView();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -79,6 +82,8 @@
             this.label12 = new System.Windows.Forms.Label();
             this.txtTotFunc = new System.Windows.Forms.TextBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.grdFuncDet = new System.Windows.Forms.DataGridView();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -97,11 +102,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.cboFuncionarios = new System.Windows.Forms.ComboBox();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.lblDescFunc = new System.Windows.Forms.Label();
-            this.lblFuncDesc2 = new System.Windows.Forms.Label();
-            this.txtDescFunc = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.grdFuncDet = new System.Windows.Forms.DataGridView();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.stNumpeds.SuspendLayout();
@@ -115,9 +115,9 @@
             this.panel2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdFuncDet)).BeginInit();
             this.panel3.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdFuncDet)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -350,6 +350,7 @@
             // 
             this.grdRel.AllowUserToAddRows = false;
             this.grdRel.AllowUserToDeleteRows = false;
+            this.grdRel.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.grdRel.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdRel.Location = new System.Drawing.Point(23, 195);
             this.grdRel.Name = "grdRel";
@@ -497,6 +498,40 @@
             this.tabPage2.Size = new System.Drawing.Size(871, 547);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Vendas por Funcionário";
+            // 
+            // lblDescFunc
+            // 
+            this.lblDescFunc.AutoSize = true;
+            this.lblDescFunc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDescFunc.Location = new System.Drawing.Point(233, 483);
+            this.lblDescFunc.Name = "lblDescFunc";
+            this.lblDescFunc.Size = new System.Drawing.Size(183, 16);
+            this.lblDescFunc.TabIndex = 63;
+            this.lblDescFunc.Text = "Total com desconto aplicado";
+            this.lblDescFunc.Visible = false;
+            // 
+            // lblFuncDesc2
+            // 
+            this.lblFuncDesc2.AutoSize = true;
+            this.lblFuncDesc2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFuncDesc2.Location = new System.Drawing.Point(232, 505);
+            this.lblFuncDesc2.Name = "lblFuncDesc2";
+            this.lblFuncDesc2.Size = new System.Drawing.Size(33, 24);
+            this.lblFuncDesc2.TabIndex = 62;
+            this.lblFuncDesc2.Text = "R$";
+            this.lblFuncDesc2.Visible = false;
+            // 
+            // txtDescFunc
+            // 
+            this.txtDescFunc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txtDescFunc.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDescFunc.Location = new System.Drawing.Point(271, 503);
+            this.txtDescFunc.Name = "txtDescFunc";
+            this.txtDescFunc.ReadOnly = true;
+            this.txtDescFunc.Size = new System.Drawing.Size(98, 30);
+            this.txtDescFunc.TabIndex = 61;
+            this.txtDescFunc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtDescFunc.Visible = false;
             // 
             // button2
             // 
@@ -709,6 +744,30 @@
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Vendas por Funcionário Detalhado";
             // 
+            // grdFuncDet
+            // 
+            this.grdFuncDet.AllowUserToAddRows = false;
+            this.grdFuncDet.AllowUserToDeleteRows = false;
+            this.grdFuncDet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.grdFuncDet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.grdFuncDet.Location = new System.Drawing.Point(21, 181);
+            this.grdFuncDet.Name = "grdFuncDet";
+            this.grdFuncDet.ReadOnly = true;
+            this.grdFuncDet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.grdFuncDet.Size = new System.Drawing.Size(829, 275);
+            this.grdFuncDet.TabIndex = 62;
+            // 
+            // button3
+            // 
+            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button3.Location = new System.Drawing.Point(711, 480);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(139, 33);
+            this.button3.TabIndex = 61;
+            this.button3.Text = "Fechar";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.Button3_Click);
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.SystemColors.ActiveBorder;
@@ -898,64 +957,6 @@
             this.cboFuncionarios.Size = new System.Drawing.Size(274, 28);
             this.cboFuncionarios.TabIndex = 46;
             // 
-            // lblDescFunc
-            // 
-            this.lblDescFunc.AutoSize = true;
-            this.lblDescFunc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDescFunc.Location = new System.Drawing.Point(233, 483);
-            this.lblDescFunc.Name = "lblDescFunc";
-            this.lblDescFunc.Size = new System.Drawing.Size(183, 16);
-            this.lblDescFunc.TabIndex = 63;
-            this.lblDescFunc.Text = "Total com desconto aplicado";
-            this.lblDescFunc.Visible = false;
-            // 
-            // lblFuncDesc2
-            // 
-            this.lblFuncDesc2.AutoSize = true;
-            this.lblFuncDesc2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFuncDesc2.Location = new System.Drawing.Point(232, 505);
-            this.lblFuncDesc2.Name = "lblFuncDesc2";
-            this.lblFuncDesc2.Size = new System.Drawing.Size(33, 24);
-            this.lblFuncDesc2.TabIndex = 62;
-            this.lblFuncDesc2.Text = "R$";
-            this.lblFuncDesc2.Visible = false;
-            // 
-            // txtDescFunc
-            // 
-            this.txtDescFunc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.txtDescFunc.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDescFunc.Location = new System.Drawing.Point(271, 503);
-            this.txtDescFunc.Name = "txtDescFunc";
-            this.txtDescFunc.ReadOnly = true;
-            this.txtDescFunc.Size = new System.Drawing.Size(98, 30);
-            this.txtDescFunc.TabIndex = 61;
-            this.txtDescFunc.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txtDescFunc.Visible = false;
-            // 
-            // button3
-            // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(711, 480);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(139, 33);
-            this.button3.TabIndex = 61;
-            this.button3.Text = "Fechar";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.Button3_Click);
-            // 
-            // grdFuncDet
-            // 
-            this.grdFuncDet.AllowUserToAddRows = false;
-            this.grdFuncDet.AllowUserToDeleteRows = false;
-            this.grdFuncDet.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.grdFuncDet.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grdFuncDet.Location = new System.Drawing.Point(21, 181);
-            this.grdFuncDet.Name = "grdFuncDet";
-            this.grdFuncDet.ReadOnly = true;
-            this.grdFuncDet.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.grdFuncDet.Size = new System.Drawing.Size(829, 275);
-            this.grdFuncDet.TabIndex = 62;
-            // 
             // relatorioVenda
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -988,11 +989,11 @@
             this.groupBox1.PerformLayout();
             this.tabPage3.ResumeLayout(false);
             this.tabPage3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.grdFuncDet)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grdFuncDet)).EndInit();
             this.ResumeLayout(false);
 
         }

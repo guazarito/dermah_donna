@@ -81,13 +81,22 @@ namespace Dermahdonna
             }
             else
             {
+                txtValorProcedimento.Text = txtValorProcedimento.Text.Replace(".", ",");
+                txtValorProcedimento.Text = string.Format("{0:C}", Convert.ToDecimal(txtValorProcedimento.Text.ToString()));
+                txtValorProcedimento.Text = txtValorProcedimento.Text.Replace("R$ ", "");
                 String procedimento = txtDescProcedimento.Text.Replace("'", "''");
                 decimal Valor;
                 String sValorProc;
                 try
                 {
-                    sValorProc = txtValorProcedimento.Text.Replace(".", ",");
-                    Valor = Convert.ToDecimal(sValorProc, CultureInfo.CurrentCulture);
+                    if (Convert.ToDecimal(txtValorProcedimento.Text, CultureInfo.CurrentCulture) >= 1000)
+                    {
+                        sValorProc = txtValorProcedimento.Text.Replace(".", "");
+                        sValorProc = sValorProc.Replace(",", "");
+                        sValorProc = sValorProc.Insert(sValorProc.Length - 2, ".");
+                    }
+
+                    Valor = Convert.ToDecimal(txtValorProcedimento.Text, CultureInfo.CurrentCulture);
                 }
                 catch (Exception)
                 {
