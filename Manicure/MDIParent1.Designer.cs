@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MDIParent1));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnVenda = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -53,7 +54,6 @@
             this.toolMnuConsulta = new System.Windows.Forms.ToolStripContainer();
             this.btnConsultaClientes = new System.Windows.Forms.Button();
             this.btnConsultaVendas = new System.Windows.Forms.Button();
-            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -80,6 +80,12 @@
             // 
             this.toolStripStatusLabel.Name = "toolStripStatusLabel";
             this.toolStripStatusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(28, 17);
+            this.toolStripStatusLabel1.Text = "v1.1";
             // 
             // btnVenda
             // 
@@ -176,7 +182,7 @@
             this.toolMnuCadastro.ContentPanel.Controls.Add(this.btnCadAdicionais);
             this.toolMnuCadastro.ContentPanel.Controls.Add(this.btnCadCli);
             this.toolMnuCadastro.ContentPanel.Controls.Add(this.btnCadProc);
-            this.toolMnuCadastro.ContentPanel.Size = new System.Drawing.Size(146, 154);
+            this.toolMnuCadastro.ContentPanel.Size = new System.Drawing.Size(146, 129);
             this.toolMnuCadastro.Location = new System.Drawing.Point(128, 95);
             this.toolMnuCadastro.Name = "toolMnuCadastro";
             this.toolMnuCadastro.Size = new System.Drawing.Size(146, 154);
@@ -250,7 +256,7 @@
             // mnuRelatorios.ContentPanel
             // 
             this.mnuRelatorios.ContentPanel.Controls.Add(this.btnRelVendas);
-            this.mnuRelatorios.ContentPanel.Size = new System.Drawing.Size(161, 39);
+            this.mnuRelatorios.ContentPanel.Size = new System.Drawing.Size(161, 14);
             this.mnuRelatorios.Location = new System.Drawing.Point(128, 255);
             this.mnuRelatorios.Name = "mnuRelatorios";
             this.mnuRelatorios.Size = new System.Drawing.Size(161, 39);
@@ -282,7 +288,7 @@
             // 
             this.toolMnuConsulta.ContentPanel.Controls.Add(this.btnConsultaClientes);
             this.toolMnuConsulta.ContentPanel.Controls.Add(this.btnConsultaVendas);
-            this.toolMnuConsulta.ContentPanel.Size = new System.Drawing.Size(147, 64);
+            this.toolMnuConsulta.ContentPanel.Size = new System.Drawing.Size(147, 39);
             this.toolMnuConsulta.Location = new System.Drawing.Point(328, 168);
             this.toolMnuConsulta.Name = "toolMnuConsulta";
             this.toolMnuConsulta.Size = new System.Drawing.Size(147, 64);
@@ -313,12 +319,6 @@
             this.btnConsultaVendas.Text = "Vendas";
             this.btnConsultaVendas.UseVisualStyleBackColor = true;
             this.btnConsultaVendas.Click += new System.EventHandler(this.BtnConsultaVendas_Click);
-            // 
-            // toolStripStatusLabel1
-            // 
-            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(28, 17);
-            this.toolStripStatusLabel1.Text = "v1.0";
             // 
             // MDIParent1
             // 
