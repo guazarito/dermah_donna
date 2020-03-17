@@ -301,6 +301,7 @@ namespace Dermahdonna
                             MessageBox.Show("Venda gravada com sucesso.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                             cboClientes.SelectedIndex = -1;
+                            cboClientes.Text = "";
                             cboFuncionarios.SelectedIndex = -1;
                             cboProcedimento.SelectedIndex = -1;
                             cboAdicional.SelectedIndex = -1;

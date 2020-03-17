@@ -36,6 +36,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.btnVenda = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnDespesas = new System.Windows.Forms.Button();
             this.btnCadastro = new System.Windows.Forms.Button();
             this.btnRels = new System.Windows.Forms.Button();
             this.btnConsulta = new System.Windows.Forms.Button();
@@ -107,6 +108,7 @@
             this.panel1.BackColor = System.Drawing.Color.Indigo;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel1.Controls.Add(this.btnDespesas);
             this.panel1.Controls.Add(this.btnCadastro);
             this.panel1.Controls.Add(this.btnRels);
             this.panel1.Controls.Add(this.btnConsulta);
@@ -116,6 +118,20 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(126, 616);
             this.panel1.TabIndex = 6;
+            // 
+            // btnDespesas
+            // 
+            this.btnDespesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDespesas.Image = ((System.Drawing.Image)(resources.GetObject("btnDespesas.Image")));
+            this.btnDespesas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDespesas.Location = new System.Drawing.Point(3, 241);
+            this.btnDespesas.Name = "btnDespesas";
+            this.btnDespesas.Size = new System.Drawing.Size(118, 61);
+            this.btnDespesas.TabIndex = 11;
+            this.btnDespesas.Text = "Despesas";
+            this.btnDespesas.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnDespesas.UseVisualStyleBackColor = true;
+            this.btnDespesas.Click += new System.EventHandler(this.btnDespesas_Click);
             // 
             // btnCadastro
             // 
@@ -136,7 +152,7 @@
             this.btnRels.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRels.Image = ((System.Drawing.Image)(resources.GetObject("btnRels.Image")));
             this.btnRels.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnRels.Location = new System.Drawing.Point(3, 243);
+            this.btnRels.Location = new System.Drawing.Point(3, 317);
             this.btnRels.Name = "btnRels";
             this.btnRels.Size = new System.Drawing.Size(118, 61);
             this.btnRels.TabIndex = 9;
@@ -257,7 +273,7 @@
             // 
             this.mnuRelatorios.ContentPanel.Controls.Add(this.btnRelVendas);
             this.mnuRelatorios.ContentPanel.Size = new System.Drawing.Size(161, 14);
-            this.mnuRelatorios.Location = new System.Drawing.Point(128, 255);
+            this.mnuRelatorios.Location = new System.Drawing.Point(128, 329);
             this.mnuRelatorios.Name = "mnuRelatorios";
             this.mnuRelatorios.Size = new System.Drawing.Size(161, 39);
             this.mnuRelatorios.TabIndex = 12;
@@ -280,6 +296,12 @@
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 300000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // toolMnuConsulta
             // 
@@ -383,6 +405,7 @@
         private System.Windows.Forms.Button btnConsultaClientes;
         private System.Windows.Forms.Button btnConsultaVendas;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.Button btnDespesas;
     }
 }
 

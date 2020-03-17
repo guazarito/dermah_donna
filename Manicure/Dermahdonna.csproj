@@ -51,6 +51,9 @@
   <PropertyGroup>
     <ApplicationIcon>favicon %281%29.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -74,6 +77,7 @@
       <Private>True</Private>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -107,6 +111,12 @@
     </Compile>
     <Compile Include="ConsultaClientes.Designer.cs">
       <DependentUpon>ConsultaClientes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="despesas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="despesas.Designer.cs">
+      <DependentUpon>despesas.cs</DependentUpon>
     </Compile>
     <Compile Include="VerVendas.cs">
       <SubType>Form</SubType>
@@ -172,6 +182,9 @@
     <EmbeddedResource Include="ConsultaPedidos.resx">
       <DependentUpon>ConsultaPedidos.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="despesas.resx">
+      <DependentUpon>despesas.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="VerVendas.resx">
       <DependentUpon>VerVendas.cs</DependentUpon>
     </EmbeddedResource>
@@ -207,6 +220,7 @@
     <EmbeddedResource Include="Venda.resx">
       <DependentUpon>Venda.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

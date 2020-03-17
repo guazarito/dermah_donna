@@ -9,6 +9,8 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using System.ServiceProcess;
+using System.Linq;
 
 namespace Dermahdonna
 {
@@ -22,8 +24,70 @@ namespace Dermahdonna
 
             InitializeComponent();
 
-            ChecaLicenca();
+            // ChecaLicenca();
 
+            if (serviceExists("Dermahdonna_SincronizaBancos") && !serviceIsRunning("Dermahdonna_SincronizaBancos"))
+            {
+                Console.WriteLine("Service exists");
+                startService("Dermahdonna_SincronizaBancos");
+            }
+            else
+            {
+                Console.WriteLine("Service doesn't exists");
+            }
+
+        }
+
+        public bool serviceExists(string ServiceName)
+        {
+            return ServiceController.GetServices().Any(serviceController => serviceController.ServiceName.Equals(ServiceName));
+        }
+
+        public void startService(string ServiceName)
+        {
+            ServiceController sc = new ServiceController();
+            sc.ServiceName = ServiceName;
+
+            Console.WriteLine("The {0} service status is currently set to {1}", ServiceName, sc.Status.ToString());
+
+            if (sc.Status == ServiceControllerStatus.Stopped)
+            {
+                // Start the service if the current status is stopped.
+                Console.WriteLine("Starting the {0} service ...", ServiceName);
+                try
+                {
+                    // Start the service, and wait until its status is "Running".
+                    sc.Start();
+                    sc.WaitForStatus(ServiceControllerStatus.Running);
+
+                    // Display the current service status.
+                    Console.WriteLine("The {0} service status is now set to {1}.", ServiceName, sc.Status.ToString());
+                }
+                catch (InvalidOperationException e)
+                {
+                    Console.WriteLine("Could not start the {0} service.", ServiceName);
+                    Console.WriteLine(e.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Service {0} already running.", ServiceName);
+            }
+        }
+
+        public bool serviceIsRunning(string ServiceName)
+        {
+            ServiceController sc = new ServiceController();
+            sc.ServiceName = ServiceName;
+
+            if (sc.Status == ServiceControllerStatus.Running)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void BtnCadastro_Click(object sender, EventArgs e)
@@ -222,6 +286,31 @@ namespace Dermahdonna
             toolMnuConsulta.Visible = false;
 
             ConsultaClientes newMDIChild = new ConsultaClientes();
+            newMDIChild.MdiParent = this;
+            newMDIChild.Show();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = "timer executou " + DateTime.Now.ToString();
+            if (serviceExists("Dermahdonna_SincronizaBancos") && !serviceIsRunning("Dermahdonna_SincronizaBancos"))
+            {
+                Console.WriteLine("Service exists");
+                startService("Dermahdonna_SincronizaBancos");
+            }
+            else
+            {
+                Console.WriteLine("Service doesn't exists");
+            }
+        }
+
+        private void btnDespesas_Click(object sender, EventArgs e)
+        {
+            toolMnuCadastro.Visible = false;
+            mnuRelatorios.Visible = false;
+            toolMnuConsulta.Visible = false;
+
+            despesas newMDIChild = new despesas();
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
         }

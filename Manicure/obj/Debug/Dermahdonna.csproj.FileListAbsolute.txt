@@ -8,7 +8,6 @@ C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.csprojAss
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.csproj.ResolveComReference.cache
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.Properties.Resources.resources
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.csproj.GenerateResource.cache
-C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.csproj.CoreCompileInputs.cache
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.csproj.CopyComplete
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.exe
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.pdb
@@ -24,3 +23,4 @@ C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.Procedime
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.relatorioFaturamento.resources
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.relatorioVenda.resources
 C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.Venda.resources
+C:\Users\guaza\source\repos\Dermahdonna\Manicure\obj\Debug\Dermahdonna.despesas.resources
