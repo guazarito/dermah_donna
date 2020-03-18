@@ -21,8 +21,7 @@ namespace Dermahdonna
 
         public despesas()
         {
-            InitializeComponent();
-            preencheGridDespesasGerais(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"));
+            InitializeComponent(); 
         }
 
         Boolean updating_despesas_gerais = false;
@@ -59,7 +58,7 @@ namespace Dermahdonna
                         String sPrice = price.ToString().Replace(",", ".");
                         //   MessageBox.Show(sPrice);
                         //    MessageBox.Show(price.ToString("#.#0"));
-                        c.ExecutaQuery("update despesas set descricao='" + txtDescricaoDespesasGerais.Text.ToString() + "', valor=" + sPrice + ", data='" + txtDataDespesasGerais.Value.ToString("MM-dd-yyyy") + "' where id=" + grdDespesasGerais[0, grdDespesasGerais.CurrentRow.Index].Value.ToString());
+                        c.ExecutaQuery("update despesas set descricao='" + txtDescricaoDespesasGerais.Text.ToString() + "', valor=" + sPrice + ", data=cast('" + txtDataDespesasGerais.Value.ToString("yyyy-MM-dd") + "' as date) where id=" + grdDespesasGerais[0, grdDespesasGerais.CurrentRow.Index].Value.ToString());
                         preencheGridDespesasGerais(txtDataDespesasGerais.Value.ToString("yyyy-MM-dd"), txtDataDespesasGerais.Value.ToString("yyyy-MM-dd"));
                         btnLimparDespesasGerais_Click(new Object(), new EventArgs());
                     }
@@ -284,6 +283,28 @@ namespace Dermahdonna
             {
                 GC.Collect();
             }
+        }
+
+        private void despesas_Load(object sender, EventArgs e)
+        {
+        //    MessageBox.Show("loaded");
+        //    btnLimpaFiltro.PerformClick();
+        }
+
+        private void despesas_Shown(object sender, EventArgs e)
+        {
+       //     MessageBox.Show("shown");
+            btnLimpaFiltro.PerformClick();
+        }
+
+        private void btnEditarDespesa_Click(object sender, EventArgs e)
+        {
+            txtDescricaoDespesasGerais.Text = grdDespesasGerais[1, grdDespesasGerais.CurrentRow.Index].Value.ToString();
+            txtValorDespesasGerais.Text = grdDespesasGerais[2, grdDespesasGerais.CurrentRow.Index].Value.ToString().Replace("R$ ", "");
+
+            txtDataDespesasGerais.Value = new DateTime(int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[2]), int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[1]), int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[0]));
+
+            updating_despesas_gerais = true;
         }
     }
 }
