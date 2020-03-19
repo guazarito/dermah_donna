@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(despesas));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle22 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle23 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle24 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.txtDescricaoDespesasGerais = new System.Windows.Forms.TextBox();
@@ -44,7 +44,6 @@
             this.txtValorDespesasGerais = new System.Windows.Forms.TextBox();
             this.btnDeletarDespesasGerais = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnLimpaFiltro = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.btnFiltrar = new System.Windows.Forms.Button();
             this.dtPickerFinal = new System.Windows.Forms.DateTimePicker();
@@ -57,6 +56,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnVerDespesasHoje = new System.Windows.Forms.Button();
+            this.btnVerTodasDespesas = new System.Windows.Forms.Button();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.grdDespesasGerais)).BeginInit();
@@ -191,7 +192,6 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnLimpaFiltro);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.btnFiltrar);
             this.groupBox1.Controls.Add(this.dtPickerFinal);
@@ -199,28 +199,16 @@
             this.groupBox1.Controls.Add(this.dtPickerInicial);
             this.groupBox1.Location = new System.Drawing.Point(12, 88);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(802, 59);
+            this.groupBox1.Size = new System.Drawing.Size(540, 64);
             this.groupBox1.TabIndex = 34;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtro";
-            // 
-            // btnLimpaFiltro
-            // 
-            this.btnLimpaFiltro.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLimpaFiltro.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpaFiltro.Location = new System.Drawing.Point(529, 18);
-            this.btnLimpaFiltro.Name = "btnLimpaFiltro";
-            this.btnLimpaFiltro.Size = new System.Drawing.Size(161, 30);
-            this.btnLimpaFiltro.TabIndex = 36;
-            this.btnLimpaFiltro.Text = "Ver Despesas de Hoje";
-            this.btnLimpaFiltro.UseVisualStyleBackColor = true;
-            this.btnLimpaFiltro.Click += new System.EventHandler(this.btnLimpaFiltro_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(237, 26);
+            this.label2.Location = new System.Drawing.Point(209, 26);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(74, 18);
             this.label2.TabIndex = 37;
@@ -231,11 +219,11 @@
             this.btnFiltrar.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnFiltrar.Image = ((System.Drawing.Image)(resources.GetObject("btnFiltrar.Image")));
             this.btnFiltrar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFiltrar.Location = new System.Drawing.Point(444, 18);
+            this.btnFiltrar.Location = new System.Drawing.Point(405, 18);
             this.btnFiltrar.Name = "btnFiltrar";
-            this.btnFiltrar.Size = new System.Drawing.Size(66, 31);
+            this.btnFiltrar.Size = new System.Drawing.Size(118, 31);
             this.btnFiltrar.TabIndex = 35;
-            this.btnFiltrar.Text = "Filtrar";
+            this.btnFiltrar.Text = "Filtrar por data";
             this.btnFiltrar.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnFiltrar.UseVisualStyleBackColor = true;
             this.btnFiltrar.Click += new System.EventHandler(this.btnFiltrar_Click);
@@ -244,7 +232,7 @@
             // 
             this.dtPickerFinal.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtPickerFinal.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtPickerFinal.Location = new System.Drawing.Point(317, 23);
+            this.dtPickerFinal.Location = new System.Drawing.Point(289, 23);
             this.dtPickerFinal.Name = "dtPickerFinal";
             this.dtPickerFinal.Size = new System.Drawing.Size(110, 22);
             this.dtPickerFinal.TabIndex = 36;
@@ -276,38 +264,38 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdDespesasGerais.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle22.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle22.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle22.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle22.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle22.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle22.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle22.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdDespesasGerais.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle22;
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdDespesasGerais.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.grdDespesasGerais.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle23.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle23.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle23.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle23.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle23.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle23.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle23.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdDespesasGerais.DefaultCellStyle = dataGridViewCellStyle23;
-            this.grdDespesasGerais.Location = new System.Drawing.Point(14, 153);
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdDespesasGerais.DefaultCellStyle = dataGridViewCellStyle8;
+            this.grdDespesasGerais.Location = new System.Drawing.Point(14, 158);
             this.grdDespesasGerais.MultiSelect = false;
             this.grdDespesasGerais.Name = "grdDespesasGerais";
             this.grdDespesasGerais.ReadOnly = true;
-            dataGridViewCellStyle24.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle24.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle24.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle24.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle24.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle24.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle24.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdDespesasGerais.RowHeadersDefaultCellStyle = dataGridViewCellStyle24;
+            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle9.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdDespesasGerais.RowHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.grdDespesasGerais.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdDespesasGerais.ShowEditingIcon = false;
-            this.grdDespesasGerais.Size = new System.Drawing.Size(800, 279);
+            this.grdDespesasGerais.Size = new System.Drawing.Size(800, 274);
             this.grdDespesasGerais.TabIndex = 35;
             this.grdDespesasGerais.TabStop = false;
             this.grdDespesasGerais.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdDespesasGerais_CellClick);
@@ -372,11 +360,36 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // btnVerDespesasHoje
+            // 
+            this.btnVerDespesasHoje.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerDespesasHoje.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVerDespesasHoje.Location = new System.Drawing.Point(637, 91);
+            this.btnVerDespesasHoje.Name = "btnVerDespesasHoje";
+            this.btnVerDespesasHoje.Size = new System.Drawing.Size(161, 26);
+            this.btnVerDespesasHoje.TabIndex = 58;
+            this.btnVerDespesasHoje.Text = "Ver Despesas de Hoje";
+            this.btnVerDespesasHoje.UseVisualStyleBackColor = true;
+            this.btnVerDespesasHoje.Click += new System.EventHandler(this.btnVerDespesasHoje_Click);
+            // 
+            // btnVerTodasDespesas
+            // 
+            this.btnVerTodasDespesas.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnVerTodasDespesas.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnVerTodasDespesas.Location = new System.Drawing.Point(637, 123);
+            this.btnVerTodasDespesas.Name = "btnVerTodasDespesas";
+            this.btnVerTodasDespesas.Size = new System.Drawing.Size(161, 26);
+            this.btnVerTodasDespesas.TabIndex = 59;
+            this.btnVerTodasDespesas.Text = "Ver Todas Despesas";
+            this.btnVerTodasDespesas.UseVisualStyleBackColor = true;
+            // 
             // despesas
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(828, 532);
+            this.Controls.Add(this.btnVerTodasDespesas);
+            this.Controls.Add(this.btnVerDespesasHoje);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.txtPrecoTotal);
             this.Controls.Add(this.label3);
@@ -419,7 +432,6 @@
         private System.Windows.Forms.DateTimePicker dtPickerFinal;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtPickerInicial;
-        private System.Windows.Forms.Button btnLimpaFiltro;
         private System.Windows.Forms.Button btnFiltrar;
         private System.Windows.Forms.DataGridView grdDespesasGerais;
         private System.Windows.Forms.Button btnEditarDespesa;
@@ -428,5 +440,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnVerDespesasHoje;
+        private System.Windows.Forms.Button btnVerTodasDespesas;
     }
 }

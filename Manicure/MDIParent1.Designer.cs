@@ -85,8 +85,8 @@
             // toolStripStatusLabel1
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-            this.toolStripStatusLabel1.Size = new System.Drawing.Size(28, 17);
-            this.toolStripStatusLabel1.Text = "v1.1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(37, 17);
+            this.toolStripStatusLabel1.Text = "v2.0.0";
             // 
             // btnVenda
             // 

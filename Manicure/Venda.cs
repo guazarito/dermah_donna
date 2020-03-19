@@ -15,7 +15,7 @@ namespace Dermahdonna
 
 
             int id = c.RetornaIdVendaAtual();
-            txtNumVenda.Text = id.ToString().PadLeft(6, '0');
+            txtNumVenda.Text = id.ToString().PadLeft(9, '0');
             txtNumVenda.Select(txtNumVenda.Text.Length, txtNumVenda.Text.Length);
 
             c.fillCombo(cboClientes, "select * from cliente where deletado <> 1 order by nome ", "id", "nome");

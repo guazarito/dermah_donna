@@ -94,7 +94,7 @@
             this.txtNumVenda.Location = new System.Drawing.Point(119, 31);
             this.txtNumVenda.Name = "txtNumVenda";
             this.txtNumVenda.ReadOnly = true;
-            this.txtNumVenda.Size = new System.Drawing.Size(83, 31);
+            this.txtNumVenda.Size = new System.Drawing.Size(183, 31);
             this.txtNumVenda.TabIndex = 1;
             this.txtNumVenda.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 

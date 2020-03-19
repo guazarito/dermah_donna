@@ -31,6 +31,9 @@ namespace Dermahdonna
             if (txtDescricaoDespesasGerais.Text != "" && txtValorDespesasGerais.Text != "")
             {
                 txtValorDespesasGerais.Text = txtValorDespesasGerais.Text.Replace(",", ".");
+
+            
+
                 if (!updating_despesas_gerais) //salvando ....
                 {
                     try
@@ -46,7 +49,7 @@ namespace Dermahdonna
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
+                        MessageBox.Show("Verifique se os campos estão preenchidos corretamente !");
                     }
                 }
                 else //atualizando....
@@ -64,7 +67,7 @@ namespace Dermahdonna
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show(ex.ToString());
+                        MessageBox.Show("Verifique se os campos estão preenchidos corretamente !");
                     }
                 }
             }
@@ -294,7 +297,7 @@ namespace Dermahdonna
         private void despesas_Shown(object sender, EventArgs e)
         {
        //     MessageBox.Show("shown");
-            btnLimpaFiltro.PerformClick();
+            btnVerDespesasHoje.PerformClick();
         }
 
         private void btnEditarDespesa_Click(object sender, EventArgs e)
@@ -305,6 +308,11 @@ namespace Dermahdonna
             txtDataDespesasGerais.Value = new DateTime(int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[2]), int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[1]), int.Parse(grdDespesasGerais[3, grdDespesasGerais.CurrentRow.Index].Value.ToString().Split('/')[0]));
 
             updating_despesas_gerais = true;
+        }
+
+        private void btnVerDespesasHoje_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

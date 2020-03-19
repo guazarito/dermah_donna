@@ -292,7 +292,7 @@ namespace Dermahdonna
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            toolStripStatusLabel1.Text = "timer executou " + DateTime.Now.ToString();
+            //toolStripStatusLabel1.Text = "timer executou " + DateTime.Now.ToString();
             if (serviceExists("Dermahdonna_SincronizaBancos") && !serviceIsRunning("Dermahdonna_SincronizaBancos"))
             {
                 Console.WriteLine("Service exists");
