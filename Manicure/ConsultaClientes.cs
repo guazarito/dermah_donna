@@ -9,14 +9,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Odbc;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class ConsultaClientes : Form
     {
         conexao c = new conexao();
-        public ConsultaClientes()
+        private MDIParent1 Form;
+
+        public ConsultaClientes(MDIParent1 mdi)
         {
             InitializeComponent();
+            Form = mdi; //mdiparent
         }
 
         private void BtnBuscarCli_Click(object sender, EventArgs e)
@@ -36,6 +39,16 @@ namespace Dermahdonna
 
             grdConsultaClientes.ClearSelection();
 
+        }
+
+        private void grdConsultaClientes_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int idcliente = Convert.ToInt32(grdConsultaClientes[0, grdConsultaClientes.CurrentRow.Index].Value);
+
+            VendasPorCliente newMDIChild = new VendasPorCliente(idcliente, Form);
+
+            newMDIChild.MdiParent = Form;
+            newMDIChild.Show();
         }
     }
 }

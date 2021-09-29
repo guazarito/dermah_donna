@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Dermahdonna
+namespace Yumi
 {
 
     public partial class Venda : Form
@@ -320,7 +320,7 @@ namespace Dermahdonna
                             btnDelItem.Visible = false;
 
                             int id = c.RetornaIdVendaAtual();
-                            txtNumVenda.Text = id.ToString().PadLeft(6, '0');
+                            txtNumVenda.Text = id.ToString().PadLeft(9, '0');
                         }
 
                     }
@@ -366,7 +366,7 @@ namespace Dermahdonna
         private void ToolStripButton1_Click(object sender, EventArgs e)
         {
             int id = c.RetornaIdVendaAtual();
-            txtNumVenda.Text = id.ToString().PadLeft(6, '0');
+            txtNumVenda.Text = id.ToString().PadLeft(9, '0');
             txtNumVenda.Select(txtNumVenda.Text.Length, txtNumVenda.Text.Length);
 
             c.fillCombo(cboClientes, "select * from cliente where deletado <> 1 order by nome ", "id", "nome");

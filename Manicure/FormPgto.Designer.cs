@@ -1,4 +1,4 @@
-﻿namespace Dermahdonna
+﻿namespace Yumi
 {
     partial class FormPgto
     {
@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPgto));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle16 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle17 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle18 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.txtFPgto = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.btnSalvarFPgto = new System.Windows.Forms.Button();
@@ -39,6 +39,7 @@
             this.btnDeletetarFpgto = new System.Windows.Forms.Button();
             this.grdFPgto = new System.Windows.Forms.DataGridView();
             this.btnLimparFPgto = new System.Windows.Forms.Button();
+            this.chkNaoSomaTotais = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.grdFPgto)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +49,7 @@
             this.txtFPgto.Location = new System.Drawing.Point(14, 35);
             this.txtFPgto.MaxLength = 100;
             this.txtFPgto.Name = "txtFPgto";
-            this.txtFPgto.Size = new System.Drawing.Size(361, 21);
+            this.txtFPgto.Size = new System.Drawing.Size(396, 21);
             this.txtFPgto.TabIndex = 27;
             // 
             // label1
@@ -66,7 +67,7 @@
             this.btnSalvarFPgto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSalvarFPgto.Image = ((System.Drawing.Image)(resources.GetObject("btnSalvarFPgto.Image")));
             this.btnSalvarFPgto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSalvarFPgto.Location = new System.Drawing.Point(283, 69);
+            this.btnSalvarFPgto.Location = new System.Drawing.Point(318, 66);
             this.btnSalvarFPgto.Name = "btnSalvarFPgto";
             this.btnSalvarFPgto.Size = new System.Drawing.Size(92, 32);
             this.btnSalvarFPgto.TabIndex = 34;
@@ -113,38 +114,38 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.grdFPgto.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridViewCellStyle16.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle16.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle16.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle16.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle16.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle16.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdFPgto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle16;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdFPgto.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdFPgto.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle17.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle17.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle17.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle17.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle17.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle17.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle17.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.grdFPgto.DefaultCellStyle = dataGridViewCellStyle17;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.grdFPgto.DefaultCellStyle = dataGridViewCellStyle2;
             this.grdFPgto.Location = new System.Drawing.Point(12, 107);
             this.grdFPgto.MultiSelect = false;
             this.grdFPgto.Name = "grdFPgto";
             this.grdFPgto.ReadOnly = true;
-            dataGridViewCellStyle18.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle18.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle18.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle18.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle18.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle18.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle18.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdFPgto.RowHeadersDefaultCellStyle = dataGridViewCellStyle18;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdFPgto.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.grdFPgto.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.grdFPgto.ShowEditingIcon = false;
-            this.grdFPgto.Size = new System.Drawing.Size(365, 191);
+            this.grdFPgto.Size = new System.Drawing.Size(399, 191);
             this.grdFPgto.TabIndex = 37;
             this.grdFPgto.TabStop = false;
             this.grdFPgto.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GrdFPgto_CellClick);
@@ -154,7 +155,7 @@
             this.btnLimparFPgto.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimparFPgto.Image = ((System.Drawing.Image)(resources.GetObject("btnLimparFPgto.Image")));
             this.btnLimparFPgto.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimparFPgto.Location = new System.Drawing.Point(185, 69);
+            this.btnLimparFPgto.Location = new System.Drawing.Point(220, 66);
             this.btnLimparFPgto.Name = "btnLimparFPgto";
             this.btnLimparFPgto.Size = new System.Drawing.Size(92, 32);
             this.btnLimparFPgto.TabIndex = 38;
@@ -163,11 +164,22 @@
             this.btnLimparFPgto.UseVisualStyleBackColor = true;
             this.btnLimparFPgto.Click += new System.EventHandler(this.BtnLimparFPgto_Click);
             // 
+            // chkNaoSomaTotais
+            // 
+            this.chkNaoSomaTotais.AutoSize = true;
+            this.chkNaoSomaTotais.Location = new System.Drawing.Point(15, 75);
+            this.chkNaoSomaTotais.Name = "chkNaoSomaTotais";
+            this.chkNaoSomaTotais.Size = new System.Drawing.Size(173, 17);
+            this.chkNaoSomaTotais.TabIndex = 39;
+            this.chkNaoSomaTotais.Text = "Não somar saldo total relatórios";
+            this.chkNaoSomaTotais.UseVisualStyleBackColor = true;
+            // 
             // FormPgto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 340);
+            this.ClientSize = new System.Drawing.Size(423, 340);
+            this.Controls.Add(this.chkNaoSomaTotais);
             this.Controls.Add(this.btnLimparFPgto);
             this.Controls.Add(this.grdFPgto);
             this.Controls.Add(this.btnDeletetarFpgto);
@@ -175,6 +187,7 @@
             this.Controls.Add(this.btnSalvarFPgto);
             this.Controls.Add(this.txtFPgto);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(10, 10);
             this.MaximizeBox = false;
@@ -196,5 +209,6 @@
         private System.Windows.Forms.Button btnDeletetarFpgto;
         private System.Windows.Forms.DataGridView grdFPgto;
         private System.Windows.Forms.Button btnLimparFPgto;
+        private System.Windows.Forms.CheckBox chkNaoSomaTotais;
     }
 }

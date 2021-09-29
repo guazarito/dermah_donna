@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.Odbc;
 using System.Globalization;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class ConsultaPedidos : Form
     {

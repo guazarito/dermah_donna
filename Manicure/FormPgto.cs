@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class FormPgto : Form
     {
@@ -33,12 +33,13 @@ namespace Dermahdonna
             else
             {
                 String fpgto = txtFPgto.Text.Replace("'", "''");
+                int naoSomaTotaisRel = chkNaoSomaTotais.Checked ? 1 : 0;
 
                 if (!is_editing) //salvando..    
                 {
                     try
                     {
-                        c.ExecutaQuery("insert into forma_pgto (descricao) values('" + fpgto + "')");
+                        c.ExecutaQuery("insert into forma_pgto (descricao, naoSomaTotaisRelatorios) values('" + fpgto + "'," + naoSomaTotaisRel.ToString() + ")");
                         ut.preencheGrid(grdFPgto, sQueryCarregaGrid);
                         BtnLimparFPgto_Click(new Object(), new EventArgs());
                     }
@@ -49,7 +50,7 @@ namespace Dermahdonna
                 }
                 else //editando...
                 {
-                    c.ExecutaQuery("update forma_pgto set descricao='" + fpgto + "' where id =" + grdFPgto[0, grdFPgto.CurrentRow.Index].Value.ToString());
+                    c.ExecutaQuery("update forma_pgto set descricao='" + fpgto + "', naoSomaTotaisRelatorios="+ naoSomaTotaisRel.ToString() + "  where id =" + grdFPgto[0, grdFPgto.CurrentRow.Index].Value.ToString());
                     ut.preencheGrid(grdFPgto, sQueryCarregaGrid);
                     BtnLimparFPgto_Click(new Object(), new EventArgs());
                 }
@@ -63,11 +64,14 @@ namespace Dermahdonna
             grdFPgto.ClearSelection();
             btnDeletetarFpgto.Enabled = false;
             btnEditarFpgto.Enabled = false;
+            chkNaoSomaTotais.Checked = false;
         }
 
         private void BtnEditarFpgto_Click(object sender, EventArgs e)
         {
             txtFPgto.Text = grdFPgto[1, grdFPgto.CurrentRow.Index].Value.ToString();
+
+            chkNaoSomaTotais.Checked = bool.Parse(c.RetornaQuery("select isnull(naoSomaTotaisRelatorios,0) as naoSomaTotaisRelatorios from forma_pgto where id=" + grdFPgto[0, grdFPgto.CurrentRow.Index].Value.ToString(), "naoSomaTotaisRelatorios"));
 
             is_editing = true;
         }

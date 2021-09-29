@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.Odbc;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class VerVendas : Form
     {
@@ -87,6 +87,21 @@ namespace Dermahdonna
                 MessageBox.Show("CANCELADO!", "Canceled", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 lblCancelado.Visible = true;
             }
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtValorTotal_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

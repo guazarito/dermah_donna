@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 using System.ServiceProcess;
 using System.Linq;
 
-namespace Dermahdonna
+namespace Yumi
 {
 
     public partial class MDIParent1 : Form
@@ -24,9 +24,11 @@ namespace Dermahdonna
 
             InitializeComponent();
 
+            ChecaAtualizacaoVersao();
+
             // ChecaLicenca();
 
-            if (serviceExists("Dermahdonna_SincronizaBancos") && !serviceIsRunning("Dermahdonna_SincronizaBancos"))
+            /*if (serviceExists("Dermahdonna_SincronizaBancos") && !serviceIsRunning("Dermahdonna_SincronizaBancos"))
             {
                 Console.WriteLine("Service exists");
                 startService("Dermahdonna_SincronizaBancos");
@@ -34,7 +36,7 @@ namespace Dermahdonna
             else
             {
                 Console.WriteLine("Service doesn't exists");
-            }
+            }*/
 
         }
 
@@ -153,7 +155,7 @@ namespace Dermahdonna
         private void BtnConsulta_Click(object sender, EventArgs e)
         {
             toggleVisibleSubMenus(toolMnuConsulta);
-            toolMnuConsulta.Location = new Point(toolMnuCadastro.Location.X, 168);
+            toolMnuConsulta.Location = new Point(toolMnuCadastro.Location.X, 198);
 
         }
 
@@ -231,7 +233,8 @@ namespace Dermahdonna
             mnuRelatorios.Visible = false;
             toolMnuConsulta.Visible = false;
 
-            relatorioVenda newMDIChild = new relatorioVenda();
+            //relatorioVenda newMDIChild = new relatorioVenda();
+            Senha newMDIChild = new Senha();
 
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
@@ -243,7 +246,64 @@ namespace Dermahdonna
         }
 
 
-      
+        async private void ChecaAtualizacaoVersao()
+        {
+            
+            HttpClient client = new HttpClient();
+            
+            try
+            {
+                    HttpResponseMessage response = await client.GetAsync("http://justicaararaquara.com.br/api/dermahdonna/atualizaversao");
+
+                    if (response.StatusCode == HttpStatusCode.Continue) return;
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                    conexao c = new conexao();
+                        try
+                        {
+                            pnlAtualizaVersao.Visible = true;
+                            String receiveStream = response.Content.ReadAsStringAsync().Result.Replace("\n", "").Trim();
+                            String[] scripts = receiveStream.Split('#');
+
+                            int i;
+                            for (i = 0; i < scripts.Length; i++)
+                            {
+                                Console.Write(scripts[i]);
+                            try
+                            {
+                                c.ExecutaQuery(scripts[i]);
+                            }
+                            catch (Exception e)
+                            {
+                                MessageBox.Show("Erro ao alterar versão!\nEntre em contato com o desenvolvedor.\n" + e.Message, "Opss", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                //this.Close();
+                            }
+
+                        }
+                            pnlAtualizaVersao.Visible = false;
+                            MessageBox.Show("Versão atualizada com sucesso!", "Sucesso!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        catch(Exception e)
+                        {
+                            MessageBox.Show("Erro ao alterar versão!\nEntre em contato com o desenvolvedor.\n" + e.Message, "Opss", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            //this.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show(response.StatusCode + ": Erro ao alterar versão!\nVerifique sua conexão com internet e/ou entre em contato com o desenvolvedor.", "Opss", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        //this.Close();
+                    }
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        
+
         async private void ChecaLicenca()
         {
             try
@@ -285,7 +345,7 @@ namespace Dermahdonna
             mnuRelatorios.Visible = false;
             toolMnuConsulta.Visible = false;
 
-            ConsultaClientes newMDIChild = new ConsultaClientes();
+            ConsultaClientes newMDIChild = new ConsultaClientes(this);
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
         }
@@ -314,5 +374,14 @@ namespace Dermahdonna
             newMDIChild.MdiParent = this;
             newMDIChild.Show();
         }
+
+
+        private void trocarSenhaToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            TrocarSenha newMDIChild = new TrocarSenha();
+            newMDIChild.MdiParent = this;
+            newMDIChild.Show();
+        }
+
     }
 }

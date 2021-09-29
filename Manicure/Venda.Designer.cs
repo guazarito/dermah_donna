@@ -1,4 +1,4 @@
-﻿namespace Dermahdonna
+﻿namespace Yumi
 {
     partial class Venda
     {
@@ -102,7 +102,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(39, 96);
+            this.label2.Location = new System.Drawing.Point(38, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 16);
             this.label2.TabIndex = 2;
@@ -112,7 +112,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(9, 135);
+            this.label3.Location = new System.Drawing.Point(8, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 16);
             this.label3.TabIndex = 4;
@@ -124,7 +124,7 @@
             this.cboFuncionarios.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboFuncionarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboFuncionarios.FormattingEnabled = true;
-            this.cboFuncionarios.Location = new System.Drawing.Point(119, 132);
+            this.cboFuncionarios.Location = new System.Drawing.Point(118, 151);
             this.cboFuncionarios.Name = "cboFuncionarios";
             this.cboFuncionarios.Size = new System.Drawing.Size(304, 24);
             this.cboFuncionarios.TabIndex = 5;
@@ -135,16 +135,16 @@
             this.cboProcedimento.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboProcedimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboProcedimento.FormattingEnabled = true;
-            this.cboProcedimento.Location = new System.Drawing.Point(119, 184);
+            this.cboProcedimento.Location = new System.Drawing.Point(118, 201);
             this.cboProcedimento.Name = "cboProcedimento";
-            this.cboProcedimento.Size = new System.Drawing.Size(203, 24);
+            this.cboProcedimento.Size = new System.Drawing.Size(413, 24);
             this.cboProcedimento.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(10, 187);
+            this.label4.Location = new System.Drawing.Point(9, 204);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 16);
             this.label4.TabIndex = 6;
@@ -154,7 +154,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(12, 234);
+            this.label5.Location = new System.Drawing.Point(11, 249);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(66, 16);
             this.label5.TabIndex = 8;
@@ -166,9 +166,9 @@
             this.cboAdicional.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboAdicional.FormattingEnabled = true;
-            this.cboAdicional.Location = new System.Drawing.Point(119, 231);
+            this.cboAdicional.Location = new System.Drawing.Point(118, 246);
             this.cboAdicional.Name = "cboAdicional";
-            this.cboAdicional.Size = new System.Drawing.Size(203, 24);
+            this.cboAdicional.Size = new System.Drawing.Size(413, 24);
             this.cboAdicional.TabIndex = 9;
             // 
             // chkDesconto
@@ -210,9 +210,9 @@
             this.panel1.Controls.Add(this.label6);
             this.panel1.Controls.Add(this.txtDesconto);
             this.panel1.Controls.Add(this.chkDesconto);
-            this.panel1.Location = new System.Drawing.Point(439, 179);
+            this.panel1.Location = new System.Drawing.Point(439, 111);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(195, 82);
+            this.panel1.Size = new System.Drawing.Size(195, 80);
             this.panel1.TabIndex = 15;
             // 
             // btnAddDesconto
@@ -236,7 +236,7 @@
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.panel2.Controls.Add(this.cboFormaPgto);
             this.panel2.Controls.Add(this.label8);
-            this.panel2.Location = new System.Drawing.Point(439, 92);
+            this.panel2.Location = new System.Drawing.Point(439, 28);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(195, 76);
             this.panel2.TabIndex = 16;
@@ -267,7 +267,7 @@
             // 
             this.txtValorTotal.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtValorTotal.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValorTotal.Location = new System.Drawing.Point(56, 478);
+            this.txtValorTotal.Location = new System.Drawing.Point(55, 497);
             this.txtValorTotal.Name = "txtValorTotal";
             this.txtValorTotal.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtValorTotal.Size = new System.Drawing.Size(90, 31);
@@ -278,7 +278,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(18, 459);
+            this.label7.Location = new System.Drawing.Point(17, 478);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(78, 16);
             this.label7.TabIndex = 18;
@@ -288,7 +288,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(17, 482);
+            this.label9.Location = new System.Drawing.Point(16, 501);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(33, 24);
             this.label9.TabIndex = 19;
@@ -298,7 +298,7 @@
             // 
             this.lblRSDesconto.AutoSize = true;
             this.lblRSDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRSDesconto.Location = new System.Drawing.Point(173, 482);
+            this.lblRSDesconto.Location = new System.Drawing.Point(172, 501);
             this.lblRSDesconto.Name = "lblRSDesconto";
             this.lblRSDesconto.Size = new System.Drawing.Size(33, 24);
             this.lblRSDesconto.TabIndex = 22;
@@ -309,7 +309,7 @@
             // 
             this.lblTotDesconto.AutoSize = true;
             this.lblTotDesconto.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTotDesconto.Location = new System.Drawing.Point(173, 459);
+            this.lblTotDesconto.Location = new System.Drawing.Point(172, 478);
             this.lblTotDesconto.Name = "lblTotDesconto";
             this.lblTotDesconto.Size = new System.Drawing.Size(139, 16);
             this.lblTotDesconto.TabIndex = 21;
@@ -320,7 +320,7 @@
             // 
             this.txtValorTotComDesconto.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.txtValorTotComDesconto.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtValorTotComDesconto.Location = new System.Drawing.Point(212, 478);
+            this.txtValorTotComDesconto.Location = new System.Drawing.Point(211, 497);
             this.txtValorTotComDesconto.Name = "txtValorTotComDesconto";
             this.txtValorTotComDesconto.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.txtValorTotComDesconto.Size = new System.Drawing.Size(90, 31);
@@ -334,7 +334,7 @@
             this.cboClientes.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboClientes.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboClientes.FormattingEnabled = true;
-            this.cboClientes.Location = new System.Drawing.Point(119, 92);
+            this.cboClientes.Location = new System.Drawing.Point(118, 111);
             this.cboClientes.Name = "cboClientes";
             this.cboClientes.Size = new System.Drawing.Size(304, 26);
             this.cboClientes.TabIndex = 25;
@@ -344,7 +344,7 @@
             this.btnAddProcedimento.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddProcedimento.Image = ((System.Drawing.Image)(resources.GetObject("btnAddProcedimento.Image")));
             this.btnAddProcedimento.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddProcedimento.Location = new System.Drawing.Point(328, 182);
+            this.btnAddProcedimento.Location = new System.Drawing.Point(537, 197);
             this.btnAddProcedimento.Name = "btnAddProcedimento";
             this.btnAddProcedimento.Size = new System.Drawing.Size(95, 29);
             this.btnAddProcedimento.TabIndex = 26;
@@ -358,7 +358,7 @@
             this.btnAddAdicional.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddAdicional.Image = ((System.Drawing.Image)(resources.GetObject("btnAddAdicional.Image")));
             this.btnAddAdicional.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddAdicional.Location = new System.Drawing.Point(328, 229);
+            this.btnAddAdicional.Location = new System.Drawing.Point(538, 243);
             this.btnAddAdicional.Name = "btnAddAdicional";
             this.btnAddAdicional.Size = new System.Drawing.Size(95, 29);
             this.btnAddAdicional.TabIndex = 27;
@@ -372,7 +372,7 @@
             this.btnConcluirPedido.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnConcluirPedido.Image = ((System.Drawing.Image)(resources.GetObject("btnConcluirPedido.Image")));
             this.btnConcluirPedido.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnConcluirPedido.Location = new System.Drawing.Point(516, 475);
+            this.btnConcluirPedido.Location = new System.Drawing.Point(515, 494);
             this.btnConcluirPedido.Name = "btnConcluirPedido";
             this.btnConcluirPedido.Size = new System.Drawing.Size(117, 34);
             this.btnConcluirPedido.TabIndex = 28;
@@ -386,7 +386,7 @@
             this.btnLimpar.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLimpar.Image = ((System.Drawing.Image)(resources.GetObject("btnLimpar.Image")));
             this.btnLimpar.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnLimpar.Location = new System.Drawing.Point(376, 475);
+            this.btnLimpar.Location = new System.Drawing.Point(375, 494);
             this.btnLimpar.Name = "btnLimpar";
             this.btnLimpar.Size = new System.Drawing.Size(103, 34);
             this.btnLimpar.TabIndex = 39;
@@ -425,7 +425,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.grdVenda.DefaultCellStyle = dataGridViewCellStyle2;
-            this.grdVenda.Location = new System.Drawing.Point(14, 269);
+            this.grdVenda.Location = new System.Drawing.Point(13, 288);
             this.grdVenda.MultiSelect = false;
             this.grdVenda.Name = "grdVenda";
             this.grdVenda.ReadOnly = true;
@@ -496,7 +496,7 @@
             this.btnDelItem.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelItem.Image = ((System.Drawing.Image)(resources.GetObject("btnDelItem.Image")));
             this.btnDelItem.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDelItem.Location = new System.Drawing.Point(490, 428);
+            this.btnDelItem.Location = new System.Drawing.Point(489, 447);
             this.btnDelItem.Name = "btnDelItem";
             this.btnDelItem.Size = new System.Drawing.Size(143, 25);
             this.btnDelItem.TabIndex = 41;
@@ -512,7 +512,7 @@
             this.toolStripButton1});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
-            this.toolStrip1.Size = new System.Drawing.Size(660, 25);
+            this.toolStrip1.Size = new System.Drawing.Size(642, 25);
             this.toolStrip1.TabIndex = 42;
             this.toolStrip1.Text = "toolStrip1";
             // 
@@ -531,7 +531,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(660, 521);
+            this.ClientSize = new System.Drawing.Size(642, 539);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.btnDelItem);
             this.Controls.Add(this.grdVenda);
@@ -557,6 +557,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNumVenda);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "Venda";

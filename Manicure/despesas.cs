@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class despesas : Form
     {
@@ -106,7 +106,7 @@ namespace Dermahdonna
 
             txtPrecoTotal.Text = txtPrecoTotal.Text.Replace("R$ ", "");
 
-            sQuery = "select id, descricao as 'Descrição', isnull(cast(valor as varchar),0) as 'Valor', convert(varchar,data,103) as 'Data Compra' from despesas where convert(date, data, 103) >='" + dtIni + "' and convert(date, data, 103)<='" + dtFim + "' and deletado <> 1 order by data";
+            sQuery = "select id, descricao as 'Descrição', isnull(cast(valor as varchar),0) as 'Valor', convert(varchar,data,103) as 'Data Despesa' from despesas where convert(date, data, 103) >='" + dtIni + "' and convert(date, data, 103)<='" + dtFim + "' and deletado <> 1 order by data";
 
             //PREENCHE O GRID..
             DataSet ds = null;
@@ -162,12 +162,7 @@ namespace Dermahdonna
             preencheGridDespesasGerais(dtPickerInicial.Value.ToString("yyyy-MM-dd"), dtPickerFinal.Value.ToString("yyyy-MM-dd"));
         }
 
-        private void btnLimpaFiltro_Click(object sender, EventArgs e)
-        {
-            preencheGridDespesasGerais(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"));
 
-            
-        }
 
         private void grdDespesasGerais_CellClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -312,7 +307,14 @@ namespace Dermahdonna
 
         private void btnVerDespesasHoje_Click(object sender, EventArgs e)
         {
+            preencheGridDespesasGerais(DateTime.Now.ToString("yyyy-MM-dd"), DateTime.Now.ToString("yyyy-MM-dd"));
+        }
 
+        private void btnVerTodasDespesas_Click(object sender, EventArgs e)
+        {
+            String dtmin;
+            dtmin = c.RetornaQuery("select convert(varchar,min(data), 23) as mindt from despesas", "mindt");
+            preencheGridDespesasGerais(dtmin, DateTime.Now.ToString("yyyy-MM-dd"));
         }
     }
 }

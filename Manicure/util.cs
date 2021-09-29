@@ -11,7 +11,7 @@ using System.Data.Odbc;
 using System.IO;
 
 
-namespace Dermahdonna
+namespace Yumi
 {
 
 

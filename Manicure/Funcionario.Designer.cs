@@ -1,4 +1,4 @@
-﻿namespace Dermahdonna
+﻿namespace Yumi
 {
     partial class Funcionario
     {
@@ -198,6 +198,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNomeFuncionario);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Location = new System.Drawing.Point(150, 100);
             this.MaximizeBox = false;

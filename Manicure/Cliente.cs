@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class Cliente : Form
     {
@@ -97,6 +97,7 @@ namespace Dermahdonna
             grdClientes.ClearSelection();
             btnDeletarCli.Enabled = false;
             btnEditarCliente.Enabled = false;
+            is_editing = false;
         }
     }
 

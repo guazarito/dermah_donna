@@ -11,7 +11,7 @@ using System.Data.Odbc;
 using System.Globalization;
 using Excel = Microsoft.Office.Interop.Excel;
 
-namespace Dermahdonna
+namespace Yumi
 {
     public partial class relatorioVenda : Form
     {
@@ -52,9 +52,9 @@ namespace Dermahdonna
             {
                 //grdResumoPgtos
                 String sResumoPgtos;
-                sResumoPgtos = "select fp.descricao as 'Forma Pagamento', count(id_forma_pgto) as 'Qtde. Vendas', cast(sum(valor_total - desconto) as varchar) as 'Valor Total Vendido' from vendas left join forma_pgto fp on fp.id = vendas.id_forma_pgto";
+                sResumoPgtos = "select fp.descricao as 'Forma Pagamento', count(id_forma_pgto) as 'Qtde. Vendas', cast(sum(valor_total - desconto) as varchar) as 'Valor Total Vendido', isnull(fp.naoSomaTotaisRelatorios,0) as naoSomaTotaisRelatorios from vendas left join forma_pgto fp on fp.id = vendas.id_forma_pgto";
                 sResumoPgtos += " where isnull(cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
-                sResumoPgtos += " group by id_forma_pgto, fp.descricao ";
+                sResumoPgtos += " group by id_forma_pgto, fp.descricao, fp.naoSomaTotaisRelatorios ";
 
                 OdbcDataAdapter dataAdapter = new OdbcDataAdapter(sResumoPgtos, conn);
 
@@ -68,6 +68,9 @@ namespace Dermahdonna
                 grdResumoPgtos.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoPgtos.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
+                grdResumoPgtos.Columns[3].Visible = false; //naoSomaTotaisRelatorios
+
+
                 grdResumoPgtos.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoPgtos.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoPgtos.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
@@ -75,6 +78,14 @@ namespace Dermahdonna
                 for (g = 0; g < grdResumoPgtos.RowCount; g++)
                 {
                     grdResumoPgtos[2, g].Value = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoPgtos[2, g].Value.ToString().Replace(".", ",")));
+
+                    if (grdResumoPgtos[3, g].Value.ToString() == "True" || grdResumoPgtos[3, g].Value.ToString() == "true")
+                    {
+                        grdResumoPgtos.Rows[g].Cells[0].Style.BackColor = Color.NavajoWhite;
+                        grdResumoPgtos.Rows[g].Cells[1].Style.BackColor = Color.NavajoWhite;
+                        grdResumoPgtos.Rows[g].Cells[2].Style.BackColor = Color.NavajoWhite;
+                    }
+
                 }
 
                 grdResumoPgtos.ClearSelection();
@@ -113,24 +124,59 @@ namespace Dermahdonna
                 
                 //grdResumoItens
                 String sResumoItens;
-                sResumoItens = "select p.descricao as 'Descrição', count(id_procedimento) as Quantidade, cast(sum(vl_total_item) as varchar) as 'Valor total'";
-                sResumoItens += " from vendas_itens left join vendas v on v.id = vendas_itens.id_venda left join procedimento p on p.id = vendas_itens.id_procedimento";
+               // sResumoItens = "select p.descricao as 'Descrição', count(id_procedimento) as Quantidade, cast(sum(vl_total_item) as varchar) as 'Valor total', 'R$ 12,00' as 'Salão', 'R$ 8,00' as 'Colab' ";
+               // sResumoItens += " from vendas_itens left join vendas v on v.id = vendas_itens.id_venda left join procedimento p on p.id = vendas_itens.id_procedimento";
+               // sResumoItens += " where id_adicional is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+               // sResumoItens += " group by id_procedimento,  p.descricao";
+
+                sResumoItens = @"select p.descricao as 'Descrição', count(id_procedimento) as Quantidade, 
+                            cast(sum(vl_total_item) as varchar) as 'Valor total', 
+                            isnull(CASE 
+	                            WHEN isnull(p.financTpValor,0) = 1 and isnull(f.naoSomaTotaisRelatorios,0) <> 1 then cast((sum(vl_total_item)*(p.financValorSalao/100)) as varchar)
+	                            WHEN isnull(p.financTpValor,0) = 2 and isnull(f.naoSomaTotaisRelatorios,0) <> 1 then cast(p.financValorSalao as varchar)
+                            end, '0') as 'Salão',
+                            isnull(CASE 
+	                            WHEN isnull(p.financTpValor,0) = 1  then cast((sum(vl_total_item)*(p.financValorColab/100)) as varchar)
+	                            WHEN isnull(p.financTpValor,0) = 2  then cast(p.financValorColab as varchar)
+                            end, '0') as 'Colab'
+                            from vendas_itens 
+                            left join vendas v on v.id = vendas_itens.id_venda
+                            left join forma_pgto f on f.id = v.id_forma_pgto
+                            left join procedimento p on p.id = vendas_itens.id_procedimento";
                 sResumoItens += " where id_adicional is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
-                sResumoItens += " group by id_procedimento,  p.descricao";
-   
+                sResumoItens += " group by id_procedimento,  p.descricao, p.financTpValor, p.financValorColab, p.financValorSalao, f.naoSomaTotaisRelatorios";
+
 
                 OdbcDataAdapter dataAdapter3 = new OdbcDataAdapter(sResumoItens, conn);
 
                 OdbcCommandBuilder commandBuilder3 = new OdbcCommandBuilder(dataAdapter3);
                 DataSet ds3 = new DataSet();
+
                 dataAdapter3.Fill(ds3);
                 grdResumoItens.ReadOnly = true;
 
                 String sResumoItens2;
-                sResumoItens2 = "select 'adicional: ' + a.descricao as 'Descrição', count(id_adicional) as Quantidade, cast(sum(vl_total_item) as varchar) as 'Valor total' from vendas_itens ";
-                sResumoItens2 += " left join vendas v on v.id = vendas_itens.id_venda left join adicional a on a.id = vendas_itens.id_adicional";
+                //sResumoItens2 = "select 'adicional: ' + a.descricao as 'Descrição', count(id_adicional) as Quantidade, cast(sum(vl_total_item) as varchar) as 'Valor total', '0' as 'Salão', '0' as 'Colab' from vendas_itens ";
+                //sResumoItens2 += " left join vendas v on v.id = vendas_itens.id_venda left join adicional a on a.id = vendas_itens.id_adicional";
+                //sResumoItens2 += " where id_procedimento is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+                //sResumoItens2 += " group by id_adicional,  a.descricao";
+
+                sResumoItens2 = @"select 'adicional: ' + a.descricao as 'Descrição', count(id_adicional) as Quantidade, 
+                                cast(sum(vl_total_item) as varchar) as 'Valor total', 
+                                isnull(CASE 
+	                                WHEN isnull(a.financTpValor,0) = 1 and isnull(f.naoSomaTotaisRelatorios,0) <> 1  then cast((count(id_adicional))*sum(vl_total_item)*(a.financValorSalao/100) as varchar)
+	                                WHEN isnull(a.financTpValor,0) = 2 and isnull(f.naoSomaTotaisRelatorios,0) <> 1  then cast(count(id_adicional)*a.financValorSalao as varchar)
+                                end, '0') as 'Salão',
+                                isnull(CASE 
+	                                WHEN isnull(a.financTpValor,0) = 1 and isnull(f.naoSomaTotaisRelatorios,0) <> 1  then cast((count(id_adicional))*sum(vl_total_item)*(a.financValorColab/100) as varchar)
+	                                WHEN isnull(a.financTpValor,0) = 2 and isnull(f.naoSomaTotaisRelatorios,0) <> 1  then cast(count(id_adicional)*a.financValorColab as varchar)
+                                end, '0') as 'Colab'
+                                from vendas_itens 
+                                left join vendas v on v.id = vendas_itens.id_venda 
+                                left join forma_pgto f on f.id = v.id_forma_pgto
+                                left join adicional a on a.id = vendas_itens.id_adicional";
                 sResumoItens2 += " where id_procedimento is null and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
-                sResumoItens2 += " group by id_adicional,  a.descricao";
+                sResumoItens2 += " group by id_adicional,  a.descricao, a.financTpValor, a.financValorSalao, a.financValorColab, f.naoSomaTotaisRelatorios";
 
                 OdbcDataAdapter dataAdapter4 = new OdbcDataAdapter(sResumoItens2, conn);
 
@@ -139,7 +185,10 @@ namespace Dermahdonna
                 dataAdapter4.Fill(ds4);
 
                 String sResumoItens3;
-                sResumoItens3 = "select 'Desconto' as 'Descrição', count(desconto) as Quantidade , isnull(cast(sum(desconto) as varchar),0) as 'Valor total' from vendas ";
+                //sResumoItens3 = "select 'Desconto' as 'Descrição', count(desconto) as Quantidade , isnull(cast(sum(desconto) as varchar),0) as 'Valor total', '- R$ 0,50' as 'Salão', '- R$ 0,50' as 'Colab'  from vendas ";
+
+                sResumoItens3 = @"select 'Desconto' as 'Descrição', count(desconto) as Quantidade, cast((isnull(sum(desconto),0)) as varchar) as 'Valor total', 
+                cast((isnull(sum(desconto),0)/2) as varchar) as 'Salão', cast((isnull(sum(desconto),0)/2) as varchar) as 'Colab' from vendas";
                 sResumoItens3 += " where isnull(cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "' and desconto <> 0";
 
                 OdbcDataAdapter dataAdapter5 = new OdbcDataAdapter(sResumoItens3, conn);
@@ -159,11 +208,18 @@ namespace Dermahdonna
                 grdResumoItens.Columns[0].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoItens.Columns[1].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoItens.Columns[2].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grdResumoItens.Columns[3].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grdResumoItens.Columns[4].HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
 
 
                 grdResumoItens.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoItens.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
                 grdResumoItens.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grdResumoItens.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                grdResumoItens.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+                Decimal valorSalao = 0;
+                Decimal valorColab = 0;
 
                 for (g = 0; g < grdResumoItens.RowCount; g++)
                 {
@@ -174,14 +230,31 @@ namespace Dermahdonna
                         }
                         else
                         {
+                            valorSalao -= Convert.ToDecimal(grdResumoItens[3, g].Value.ToString().Replace(".", ","));
+                            valorColab -= Convert.ToDecimal(grdResumoItens[4, g].Value.ToString().Replace(".", ","));
+
                             grdResumoItens[2, g].Value = "- " + string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[2, g].Value.ToString().Replace(".", ",")));
+                            grdResumoItens[3, g].Value = "- " + string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[3, g].Value.ToString().Replace(".", ",")));
+                            grdResumoItens[4, g].Value = "- " + string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[4, g].Value.ToString().Replace(".", ",")));
                         }
                     }
                     else
                     {
+
+                        valorSalao += Convert.ToDecimal(grdResumoItens[3, g].Value.ToString().Replace(".", ","));
+                        valorColab += Convert.ToDecimal(grdResumoItens[4, g].Value.ToString().Replace(".", ","));
+
                         grdResumoItens[2, g].Value = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[2, g].Value.ToString().Replace(".", ",")));
+                        grdResumoItens[3, g].Value = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[3, g].Value.ToString().Replace(".", ",")));
+                        grdResumoItens[4, g].Value = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(grdResumoItens[4, g].Value.ToString().Replace(".", ",")));
                     }
                 }
+
+                txtValorTotalSalao.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", valorSalao);
+                txtValorTotalSalao.Text = txtValorTotalSalao.Text.Replace("R$ ", "");
+
+                txtValorTotalColab.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", valorColab);
+                txtValorTotalColab.Text = txtValorTotalColab.Text.Replace("R$ ", "");
 
                 grdResumoItens.ClearSelection();
                 //fim grdRel
@@ -220,19 +293,21 @@ namespace Dermahdonna
 
                 toolStripStatusLabel1.Text = "Número de vendas no período: " + numero_de_pedidos.ToString();
 
-                String sQueryTotal = "select isnull(cast(sum(valor_total) as varchar),0) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
-                txtPrecoTotal.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotal, "total").Replace(",", "").Replace(".", ",").Replace("R$ ", "")));
-                txtPrecoTotal.Text = txtPrecoTotal.Text.Replace("R$ ", "");
+                String sQueryTotal = "select isnull(cast(sum(valor_total) as varchar),0) as 'total' from vendas v left join forma_pgto f on f.id = v.id_forma_pgto where isnull(f.naoSomaTotaisRelatorios,0) = 0 and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+                txtTotal.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotal, "total").Replace(",", "").Replace(".", ",").Replace("R$ ", "")));
+                txtTotal.Text = txtTotal.Text.Replace("R$ ", "");
+
+
 
                 if (btemDesconto)
                 {
-                    lblPrecoDesc.Visible = true;
-                    lblPrecoDesc2.Visible = true;
-                    txtPrecoTotalDEsc.Visible = true;
+                    label22.Visible = true;
+                    label23.Visible = true;
+                    txtTotalDescApl.Visible = true;
 
-                    String sQueryTotalDesconto = "select isnull(cast(sum(valor_total - (desconto)) as varchar),0) as 'total' from vendas v where isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
-                    txtPrecoTotalDEsc.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotalDesconto, "total").Replace(",","").Replace(".",",").Replace("R$ ","")));
-                    txtPrecoTotalDEsc.Text = txtPrecoTotalDEsc.Text.Replace("R$ ","");
+                    String sQueryTotalDesconto = "select isnull(cast(sum(valor_total - (desconto)) as varchar),0) as 'total' from vendas v left join forma_pgto f on f.id = v.id_forma_pgto where isnull(f.naoSomaTotaisRelatorios,0) = 0 and isnull(v.cancelado,0) <> 1 and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
+                    txtTotalDescApl.Text = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Convert.ToDecimal(c.RetornaQuery(sQueryTotalDesconto, "total").Replace(",","").Replace(".",",").Replace("R$ ","")));
+                    txtTotalDescApl.Text = txtTotalDescApl.Text.Replace("R$ ","");
                 }
 
 
@@ -386,6 +461,9 @@ namespace Dermahdonna
             if (grdRel.RowCount > 0) { 
             DialogResult result = folderBrowserDialog1.ShowDialog();
 
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+
+
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet;
@@ -468,7 +546,7 @@ namespace Dermahdonna
 
             xlWorkSheet.Cells[NumLinhasVendasDet + 2, 1] = "Resumo ítens vendidos: ";
             xlWorkSheet.Cells[NumLinhasVendasDet + 2, 1].Font.Bold = true;
-            xlWorkSheet.Range[xlWorkSheet.Cells[NumLinhasVendasDet + 2, 1], xlWorkSheet.Cells[NumLinhasVendasDet + 2, 3]].Merge();
+            xlWorkSheet.Range[xlWorkSheet.Cells[NumLinhasVendasDet + 2, 1], xlWorkSheet.Cells[NumLinhasVendasDet + 2, 5]].Merge();
 
             xlWorkSheet.Cells[NumLinhasVendasDet + 3, 1] = grdResumoItens.Columns[0].HeaderText.ToString();
             xlWorkSheet.Cells[NumLinhasVendasDet + 3, 1].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
@@ -476,8 +554,12 @@ namespace Dermahdonna
             xlWorkSheet.Cells[NumLinhasVendasDet + 3, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             xlWorkSheet.Cells[NumLinhasVendasDet + 3, 3] = grdResumoItens.Columns[2].HeaderText.ToString();
             xlWorkSheet.Cells[NumLinhasVendasDet + 3, 3].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            xlWorkSheet.Cells[NumLinhasVendasDet + 3, 4] = grdResumoItens.Columns[3].HeaderText.ToString();
+            xlWorkSheet.Cells[NumLinhasVendasDet + 3, 4].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+            xlWorkSheet.Cells[NumLinhasVendasDet + 3, 5] = grdResumoItens.Columns[4].HeaderText.ToString();
+            xlWorkSheet.Cells[NumLinhasVendasDet + 3, 5].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-            int NumLinhasResumoItens = 0;
+                int NumLinhasResumoItens = 0;
             for (i = NumLinhasVendasDet + 4; i < grdResumoItens.RowCount + NumLinhasVendasDet + 4; i++)
             {
                 for (j = 0; j < grdResumoItens.ColumnCount; j++)
@@ -497,18 +579,27 @@ namespace Dermahdonna
             xlWorkSheet.Cells[NumLinhasResumoItens+ 1, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             xlWorkSheet.Cells[NumLinhasResumoItens+ 2, 1] = "Valor Total: ";
             xlWorkSheet.Cells[NumLinhasResumoItens+ 2, 1].Font.Bold = true;
-            xlWorkSheet.Cells[NumLinhasResumoItens+ 2, 2] = "R$ " + txtPrecoTotal.Text;
+            xlWorkSheet.Cells[NumLinhasResumoItens+ 2, 2] = "R$ " + txtTotal.Text;
             xlWorkSheet.Cells[NumLinhasResumoItens+ 2, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             if (btemDesconto)
             {
                 xlWorkSheet.Cells[NumLinhasResumoItens + 3, 1] = "Valor Total c/ desc: ";
                 xlWorkSheet.Cells[NumLinhasResumoItens + 3, 1].Font.Bold = true;
-                xlWorkSheet.Cells[NumLinhasResumoItens + 3, 2] = "R$ " + txtPrecoTotalDEsc.Text;
+                xlWorkSheet.Cells[NumLinhasResumoItens + 3, 2] = "R$ " + txtTotalDescApl.Text;
                 xlWorkSheet.Cells[NumLinhasResumoItens + 3, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
             }
 
+                xlWorkSheet.Cells[NumLinhasResumoItens + 4, 1] = "Valor Total Salão: ";
+                xlWorkSheet.Cells[NumLinhasResumoItens + 4, 1].Font.Bold = true;
+                xlWorkSheet.Cells[NumLinhasResumoItens + 4, 2] = "R$ " + txtValorTotalSalao.Text;
+                xlWorkSheet.Cells[NumLinhasResumoItens + 4, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-            xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[NumLinhasResumoItens + 3, 9]].Columns.AutoFit();
+                xlWorkSheet.Cells[NumLinhasResumoItens + 5, 1] = "Valor Total Colaboradores: ";
+                xlWorkSheet.Cells[NumLinhasResumoItens + 5, 1].Font.Bold = true;
+                xlWorkSheet.Cells[NumLinhasResumoItens + 5, 2] = "R$ " + txtValorTotalColab.Text;
+                xlWorkSheet.Cells[NumLinhasResumoItens + 5, 2].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+
+                xlWorkSheet.Range[xlWorkSheet.Cells[1, 1], xlWorkSheet.Cells[NumLinhasResumoItens + 3, 9]].Columns.AutoFit();
 
 
 
@@ -528,7 +619,8 @@ namespace Dermahdonna
                 releaseObject(xlWorkBook);
                 releaseObject(xlApp);
 
-                MessageBox.Show("Concluído");
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Arrow;
+                    MessageBox.Show("Concluído");
                 System.Diagnostics.Process.Start(folderBrowserDialog1.SelectedPath + "/relatorioVendasPorPeriodo_" + sData + ".xls");
             }
             }
@@ -663,9 +755,9 @@ namespace Dermahdonna
                 String dtFinal = dtFimFuncDet.Value.ToString("yyyy-MM-dd");
 
                 String sQueryDetFunc = "select  ROW_NUMBER() over(order by vi.id_venda) as ' Item',  right('00000' + cast(vi.id_venda as nvarchar),6) as 'Núm. da Venda', convert(varchar(11), v.data,103) as 'Data',";
-                sQueryDetFunc += " p.descricao as 'Procedimento', c.nome as 'Cliente', fp.descricao as 'Forma Pagamento', cast(vi.vl_total_item as varchar) as 'Valor Total'";
+                sQueryDetFunc += " p.descricao as 'Procedimento', v.nome_cliente as 'Cliente', fp.descricao as 'Forma Pagamento', cast(vi.vl_total_item as varchar) as 'Valor Total'";
                 sQueryDetFunc += " from vendas_itens vi left join vendas v on v.id=vi.id_venda left join funcionario f on f.id= vi.id_func left join procedimento p on p.id = vi.id_procedimento";
-                sQueryDetFunc += " left join cliente c on c.id = v.id_cliente left join forma_pgto fp on fp.id = v.id_forma_pgto";
+                sQueryDetFunc += " left join forma_pgto fp on fp.id = v.id_forma_pgto";
                 sQueryDetFunc += " where isnull(v.cancelado,0) <> 1 and id_func = " + cboFuncionarios.SelectedValue + " and convert(date,data,103) >= '" + dtInic + "' and convert(date,data,103) <= '" + dtFinal + "'";
 
 
@@ -723,6 +815,8 @@ namespace Dermahdonna
         {
             if (grdRelFunc.RowCount > 0) { 
             DialogResult result = folderBrowserDialog1.ShowDialog();
+
+            System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
 
             Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
@@ -789,7 +883,9 @@ namespace Dermahdonna
                 releaseObject(xlWorkBook);
                 releaseObject(xlApp);
 
-                MessageBox.Show("Concluído");
+
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Arrow;
+                    MessageBox.Show("Concluído");
                 System.Diagnostics.Process.Start(folderBrowserDialog1.SelectedPath + "/relatorioVendasPorFuncionario_" + sData + ".xls");
 
             }
@@ -805,7 +901,9 @@ namespace Dermahdonna
             if(grdFuncDet.RowCount > 0) { 
             DialogResult result = folderBrowserDialog1.ShowDialog();
 
-            Excel.Application xlApp;
+                System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.WaitCursor;
+
+                Excel.Application xlApp;
             Excel.Workbook xlWorkBook;
             Excel.Worksheet xlWorkSheet;
             object misValue = System.Reflection.Missing.Value;
@@ -880,7 +978,8 @@ namespace Dermahdonna
                 releaseObject(xlWorkBook);
                 releaseObject(xlApp);
 
-                MessageBox.Show("Concluído");
+                    System.Windows.Forms.Cursor.Current = System.Windows.Forms.Cursors.Arrow;
+                    MessageBox.Show("Concluído");
                 System.Diagnostics.Process.Start(folderBrowserDialog1.SelectedPath + "/relatorioVendasPorFuncionarioDetalhado_" + sData + ".xls");
 
             }

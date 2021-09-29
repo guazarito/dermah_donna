@@ -1,1 +1,0 @@
-osql -U sa -P chico110388@@ -S DESKTOP-TDF0SNR\SQLEXPRESS -i "C:\backupsqlserver.bak"

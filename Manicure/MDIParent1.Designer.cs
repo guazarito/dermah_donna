@@ -1,4 +1,4 @@
-﻿namespace Dermahdonna
+﻿namespace Yumi
 {
     partial class MDIParent1
     {
@@ -51,10 +51,15 @@
             this.mnuRelatorios = new System.Windows.Forms.ToolStripContainer();
             this.btnRelVendas = new System.Windows.Forms.Button();
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.toolMnuConsulta = new System.Windows.Forms.ToolStripContainer();
             this.btnConsultaClientes = new System.Windows.Forms.Button();
             this.btnConsultaVendas = new System.Windows.Forms.Button();
+            this.pnlAtualizaVersao = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.configuraçõesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.senhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.trocarSenhaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -64,6 +69,8 @@
             this.mnuRelatorios.SuspendLayout();
             this.toolMnuConsulta.ContentPanel.SuspendLayout();
             this.toolMnuConsulta.SuspendLayout();
+            this.pnlAtualizaVersao.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -86,7 +93,7 @@
             // 
             this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
             this.toolStripStatusLabel1.Size = new System.Drawing.Size(37, 17);
-            this.toolStripStatusLabel1.Text = "v2.0.0";
+            this.toolStripStatusLabel1.Text = "v2.0.1";
             // 
             // btnVenda
             // 
@@ -114,9 +121,9 @@
             this.panel1.Controls.Add(this.btnConsulta);
             this.panel1.Controls.Add(this.btnVenda);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Location = new System.Drawing.Point(0, 24);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(126, 616);
+            this.panel1.Size = new System.Drawing.Size(126, 592);
             this.panel1.TabIndex = 6;
             // 
             // btnDespesas
@@ -273,7 +280,7 @@
             // 
             this.mnuRelatorios.ContentPanel.Controls.Add(this.btnRelVendas);
             this.mnuRelatorios.ContentPanel.Size = new System.Drawing.Size(161, 14);
-            this.mnuRelatorios.Location = new System.Drawing.Point(128, 329);
+            this.mnuRelatorios.Location = new System.Drawing.Point(128, 356);
             this.mnuRelatorios.Name = "mnuRelatorios";
             this.mnuRelatorios.Size = new System.Drawing.Size(161, 39);
             this.mnuRelatorios.TabIndex = 12;
@@ -296,12 +303,6 @@
             // 
             this.notifyIcon1.Text = "notifyIcon1";
             this.notifyIcon1.Visible = true;
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 300000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // toolMnuConsulta
             // 
@@ -342,6 +343,57 @@
             this.btnConsultaVendas.UseVisualStyleBackColor = true;
             this.btnConsultaVendas.Click += new System.EventHandler(this.BtnConsultaVendas_Click);
             // 
+            // pnlAtualizaVersao
+            // 
+            this.pnlAtualizaVersao.Controls.Add(this.label1);
+            this.pnlAtualizaVersao.Location = new System.Drawing.Point(387, 149);
+            this.pnlAtualizaVersao.Name = "pnlAtualizaVersao";
+            this.pnlAtualizaVersao.Size = new System.Drawing.Size(257, 123);
+            this.pnlAtualizaVersao.TabIndex = 16;
+            this.pnlAtualizaVersao.Visible = false;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(53, 55);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Atualizando versão, aguarde ...";
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.configuraçõesToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1072, 24);
+            this.menuStrip1.TabIndex = 18;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // configuraçõesToolStripMenuItem
+            // 
+            this.configuraçõesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.senhaToolStripMenuItem});
+            this.configuraçõesToolStripMenuItem.Name = "configuraçõesToolStripMenuItem";
+            this.configuraçõesToolStripMenuItem.Size = new System.Drawing.Size(96, 20);
+            this.configuraçõesToolStripMenuItem.Text = "Configurações";
+            // 
+            // senhaToolStripMenuItem
+            // 
+            this.senhaToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trocarSenhaToolStripMenuItem});
+            this.senhaToolStripMenuItem.Name = "senhaToolStripMenuItem";
+            this.senhaToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
+            this.senhaToolStripMenuItem.Text = "Senha";
+            // 
+            // trocarSenhaToolStripMenuItem
+            // 
+            this.trocarSenhaToolStripMenuItem.Name = "trocarSenhaToolStripMenuItem";
+            this.trocarSenhaToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.trocarSenhaToolStripMenuItem.Text = "Trocar senha";
+            this.trocarSenhaToolStripMenuItem.Click += new System.EventHandler(this.trocarSenhaToolStripMenuItem_Click_1);
+            // 
             // MDIParent1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -349,17 +401,20 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1072, 638);
+            this.Controls.Add(this.pnlAtualizaVersao);
             this.Controls.Add(this.toolMnuConsulta);
             this.Controls.Add(this.mnuRelatorios);
             this.Controls.Add(this.toolMnuCadastro);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.statusStrip);
+            this.Controls.Add(this.menuStrip1);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MDIParent1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
-            this.Text = "Dermah Donna - Araraquara";
+            this.Text = "Yumi estética";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.MDIParent1_Load);
             this.statusStrip.ResumeLayout(false);
@@ -375,6 +430,10 @@
             this.toolMnuConsulta.ContentPanel.ResumeLayout(false);
             this.toolMnuConsulta.ResumeLayout(false);
             this.toolMnuConsulta.PerformLayout();
+            this.pnlAtualizaVersao.ResumeLayout(false);
+            this.pnlAtualizaVersao.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -397,7 +456,6 @@
         private System.Windows.Forms.ToolStripContainer mnuRelatorios;
         private System.Windows.Forms.Button btnRelVendas;
         private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Button btnCadFormPgto;
         private System.Windows.Forms.Button btnCadAdicionais;
         private System.Windows.Forms.Button btnCadFunc;
@@ -406,6 +464,12 @@
         private System.Windows.Forms.Button btnConsultaVendas;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.Button btnDespesas;
+        private System.Windows.Forms.Panel pnlAtualizaVersao;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem configuraçõesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem senhaToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem trocarSenhaToolStripMenuItem;
     }
 }
 

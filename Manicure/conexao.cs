@@ -10,14 +10,14 @@ using System.Data.Odbc;
 
 using System.IO;
 
-namespace Dermahdonna
+namespace Yumi
 {
 
 
     public class conexao
     {
         const String ConexaoString = 
-            "Dsn=odbc_dermahdonna;" +
+            "Dsn=odbc_yumi;" +
             "Uid=sa;" +
             "Pwd=chico110388@@;";
         

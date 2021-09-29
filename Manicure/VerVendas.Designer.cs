@@ -1,4 +1,4 @@
-﻿namespace Dermahdonna
+﻿namespace Yumi
 {
     partial class VerVendas
     {
@@ -99,6 +99,7 @@
             this.label9.Size = new System.Drawing.Size(33, 24);
             this.label9.TabIndex = 55;
             this.label9.Text = "R$";
+            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // label7
             // 
@@ -109,6 +110,7 @@
             this.label7.Size = new System.Drawing.Size(78, 16);
             this.label7.TabIndex = 54;
             this.label7.Text = "Valor Total";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // txtValorTotal
             // 
@@ -121,6 +123,7 @@
             this.txtValorTotal.Size = new System.Drawing.Size(90, 31);
             this.txtValorTotal.TabIndex = 53;
             this.txtValorTotal.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtValorTotal.TextChanged += new System.EventHandler(this.txtValorTotal_TextChanged);
             // 
             // panel2
             // 
@@ -317,6 +320,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNumVenda);
             this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Location = new System.Drawing.Point(100, 50);
             this.MaximizeBox = false;
             this.Name = "VerVendas";
